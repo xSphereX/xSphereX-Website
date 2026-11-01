@@ -9,8 +9,8 @@ var poemHTML = poemView.innerHTML;
 poemView.style.transition = 'opacity .3s ease';
 
 var MEANING = '<p class="poem-meaning">Focus isn&rsquo;t about wanting less — it&rsquo;s about choosing <b>one thing</b> ' +
-  'and giving it your whole attention. The melody didn&rsquo;t hand me an answer; it just made the choice ' +
-  'feel possible. So: pick a star. Walk toward it.</p>';
+  'and giving it your whole attention. The melody didn&rsquo;t hand me an answer, it just made me realize. ' +
+  'So: pick one star, and walk toward it.</p>';
 
 poemSwitch.addEventListener('click', function () {
   var on = poemSwitch.getAttribute('aria-checked') === 'true';

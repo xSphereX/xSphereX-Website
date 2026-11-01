@@ -848,18 +848,6 @@ section[id],header[id]{scroll-margin-top:104px}
 }
 .yt-link:hover{color:var(--coral)}
 .yt-link i{font-size:.56rem}
-.note{
-  display:flex;gap:11px;align-items:flex-start;
-  margin-top:auto;padding-top:16px;
-}
-.note-box{
-  display:flex;gap:11px;align-items:flex-start;
-  margin-top:18px;padding:13px 15px;
-  border-radius:12px;background:var(--coral-tint);
-  border:1px solid rgba(242,55,94,.14);
-}
-.note-box i{color:var(--coral);font-size:.78rem;margin-top:3px;flex:none}
-.note-box p{font-size:.79rem;line-height:1.6;color:#93314A}
 
 /* ── artists ── */
 .artists-head{
