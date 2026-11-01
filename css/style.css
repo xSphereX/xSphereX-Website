@@ -987,8 +987,12 @@ section[id],header[id]{scroll-margin-top:104px}
 .artist-try i{color:var(--peri);font-size:.5rem;flex:none}
 .artist-try b{
   font-weight:500;color:var(--ink-2);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+  overflow:hidden;
+  line-height:1.45;
 }
+.artist-try{align-items:flex-start}
+.artist-try i{margin-top:.18em}
 
 /* ═══════════════════════════════════════════════════════════
    9 · DARK PANELS (skin / socials)
