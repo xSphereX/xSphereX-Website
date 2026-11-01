@@ -379,6 +379,7 @@ section[id],header[id]{scroll-margin-top:104px}
 .player-card{
   position:relative;z-index:2;
   width:100%;max-width:392px;margin-left:auto;
+  min-width:0;
   padding:14px;
   border-radius:24px;
   background:linear-gradient(160deg,rgba(255,255,255,.97),rgba(255,255,255,.86));
@@ -1487,11 +1488,16 @@ section[id],header[id]{scroll-margin-top:104px}
   .games-grid,
   .artists-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 
-  .hero-grid{grid-template-columns:1fr;gap:clamp(32px,6vw,52px)}
+  /* hero stays side-by-side; the columns just get tighter */
+  .hero-grid{
+    grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr);
+    gap:clamp(18px,3.2vw,34px);
+    align-items:center;
+  }
   .hero-copy{text-align:left}
-  .hero-visual{width:100%;max-width:420px;margin:0 auto}
-  .player-card{margin-left:auto;margin-right:auto}
-  .now-card{max-width:420px;margin-left:auto;margin-right:auto}
+  .hero-visual{width:100%;max-width:none;margin:0}
+  .player-card{max-width:none;margin-left:0}
+  .now-card{max-width:none;margin-left:0;margin-right:0}
 
   .skin-grid{grid-template-columns:1fr;gap:clamp(24px,4vw,38px)}
   .viewer{max-width:520px;margin:0 auto;width:100%}
@@ -1530,11 +1536,14 @@ section[id],header[id]{scroll-margin-top:104px}
   .artist-desc{display:none}
   .artist-try{margin-top:7px;padding-top:7px}
 
+  /* true phones: the only place the hero goes vertical */
+  .hero-grid{grid-template-columns:1fr;gap:clamp(28px,7vw,44px)}
+  .hero-visual{max-width:420px;margin:0 auto}
   .hero h1{font-size:clamp(2.7rem,14vw,4rem)}
-  .player-card{max-width:320px}
+  .player-card{max-width:340px;margin-left:auto;margin-right:auto}
   .pc-face.avatar-stack{width:56px;height:56px}
   .pc-head{gap:11px;padding:13px}
-  .now-card{max-width:320px}
+  .now-card{max-width:340px;margin-left:auto;margin-right:auto}
   .hero-find .lbl{width:100%}
   .skin-stats{grid-template-columns:1fr}
   .skin-stat:nth-child(odd){padding-right:0}
