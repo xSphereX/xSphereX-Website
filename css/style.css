@@ -513,6 +513,40 @@ section[id],header[id]{scroll-margin-top:104px}
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 
+/* honourable mentions — sits under the sleeve in the dark song panel */
+.honourable{
+  margin-top:14px;padding-top:13px;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+.hm-title{
+  display:flex;align-items:center;gap:6px;
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.55);
+}
+.hm-title i{color:var(--mint-2);font-size:.5rem}
+.hm-list{
+  list-style:none;margin-top:9px;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:6px 14px;
+}
+.hm-list li{min-width:0}
+.hm-list .t{
+  display:block;
+  font-family:var(--mono);font-size:.56rem;letter-spacing:.02em;
+  color:#fff;line-height:1.35;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.hm-list .a{
+  display:block;
+  font-family:var(--mono);font-size:.45rem;letter-spacing:.08em;
+  text-transform:uppercase;color:rgba(255,255,255,.42);
+  line-height:1.4;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+@media (max-width:520px){
+  .hm-list{grid-template-columns:1fr}
+}
+
 /* now playing card */
 .now-card{
   position:relative;z-index:3;
@@ -800,7 +834,7 @@ section[id],header[id]{scroll-margin-top:104px}
   text-transform:uppercase;color:rgba(255,255,255,.85);
 }
 .song-left .chip i{color:var(--coral-2);font-size:.55rem}
-.sleeve-wrap{flex:1;min-height:0;display:grid;place-items:center;padding:16px 0}
+.sleeve-wrap{flex:1;min-height:0;display:grid;place-items:center;padding:14px 0 12px}
 .sleeve{
   position:relative;
   height:100%;width:auto;aspect-ratio:1;max-width:100%;
