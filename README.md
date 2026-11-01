@@ -23,6 +23,7 @@ js/                 one small module per feature, loaded in order
   08-poem.js          poem ⇄ meaning toggle
   09-parallax.js      pointer parallax on the hero glow
   10-skin.js          3D Minecraft skin viewer
+  11-game-modal.js    game detail dialog
 assets/             optimised WebP art (game covers + artist photos)
 ```
 
@@ -38,6 +39,8 @@ paths are happier over a local server.
 
 ## Notes
 
+- **Game details** — click (or press Enter on) a game card for a dialog with its
+  release date, developer, platforms and official link. Art is shown at full size.
 - **Profile picture** — the Discord avatar is resolved at runtime, so changing it on
   Discord updates the site on the next load. Falls back to the Minecraft head, then a
   monogram. Discord invalidates old CDN hashes, which is why a hard-coded URL breaks.

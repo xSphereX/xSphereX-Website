@@ -24,7 +24,7 @@
     <link rel="preload" as="image" href="assets/minecraft-v2.webp">
     <link rel="preload" as="image" href="assets/roblox-v2.webp">
     <link rel="preload" as="image" href="assets/starrail-v2.webp">
-    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="css/style.css?v=3">
     <noscript><style>
       /* no JS: show everything the scripts would normally reveal */
       [data-reveal]{opacity:1 !important;transform:none !important}
@@ -194,7 +194,7 @@
 
     <div class="games-grid" id="gamesGrid">
 
-      <article class="game game--coc" data-tags="mobile" data-reveal>
+      <article class="game game--coc" role="button" tabindex="0" aria-haspopup="dialog" data-year="2026" data-released="May 20, 2026" data-maker="Farlight Games" data-platforms="iOS · Android" data-link="https://cc.farlightgames.com/" data-about="A mobile game that mixes tower defense, pinball physics and critter collecting. You build a team, position your critters, then send the ball flying to hold back waves of zombies. The critters are Tataris — over a hundred designs, and they evolve as you feed and level them up." data-tags="mobile" data-reveal>
         <div class="game-cover">
           <span class="game-no">no. 01</span>
           <div class="cover-art" aria-hidden="true">
@@ -210,7 +210,7 @@
         </div>
       </article>
 
-      <article class="game game--mc" data-tags="pc,mobile,multiplayer" data-reveal style="--d:.06s">
+      <article class="game game--mc" role="button" tabindex="0" aria-haspopup="dialog" data-year="2011" data-released="November 18, 2011" data-maker="Mojang Studios" data-platforms="PC · Mobile · Console" data-link="https://www.minecraft.net/" data-about="Infinite blocks, infinite worlds. Mining, building, surviving the night — and then starting a new world the moment a build gets too ambitious. There is no ending, which is exactly why it never gets old." data-tags="pc,mobile,multiplayer" data-reveal style="--d:.06s">
         <div class="game-cover">
           <span class="game-no">no. 02</span>
           <div class="cover-art" aria-hidden="true">
@@ -226,7 +226,7 @@
         </div>
       </article>
 
-      <article class="game game--roblox" data-tags="pc,mobile,multiplayer" data-reveal style="--d:.12s">
+      <article class="game game--roblox" role="button" tabindex="0" aria-haspopup="dialog" data-year="2006" data-released="September 1, 2006" data-maker="Roblox Corporation" data-platforms="PC · Mobile · Console" data-link="https://www.roblox.com/" data-about="A platform rather than a single game: a million experiences in one place. Obbies, tycoons, horror maps, hangouts, simulators. Half the appeal is never quite knowing what you will land in." data-tags="pc,mobile,multiplayer" data-reveal style="--d:.12s">
         <div class="game-cover">
           <span class="game-no">no. 03</span>
           <div class="cover-art" aria-hidden="true">
@@ -240,7 +240,7 @@
         </div>
       </article>
 
-      <article class="game game--hsr" data-tags="pc,mobile,story" data-reveal style="--d:.18s">
+      <article class="game game--hsr" role="button" tabindex="0" aria-haspopup="dialog" data-year="2023" data-released="April 26, 2023" data-maker="HoYoverse" data-platforms="PC · Mobile · PS5" data-link="https://hsr.hoyoverse.com/" data-about="All aboard the Astral Express. Turn-based fights across the stars, a cast that keeps growing, and a story that goes places. The one I reach for when I want to sink a few hours into something." data-tags="pc,mobile,story" data-reveal style="--d:.18s">
         <div class="game-cover">
           <span class="game-no">no. 04</span>
           <div class="cover-art" aria-hidden="true">
@@ -738,6 +738,52 @@
 
 </div>
 
+<!-- game detail modal -->
+<div class="modal" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="gmTitle" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="document">
+    <button type="button" class="modal-x" data-close aria-label="Close">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <div class="modal-art">
+      <img id="gmArt" src="" alt="" decoding="async">
+    </div>
+
+    <div class="modal-body">
+      <p class="modal-kicker">
+        <span class="mk-dot" aria-hidden="true"></span>
+        <span id="gmYear">2026</span> · <span id="gmGenre">pinball · tower defense</span>
+      </p>
+
+      <h2 class="modal-title" id="gmTitle">Clash of Critters</h2>
+      <p class="modal-about" id="gmAbout"></p>
+
+      <div class="modal-facts">
+        <div class="fact">
+          <span class="f-k">made by</span>
+          <span class="f-v" id="gmMaker">Farlight Games</span>
+        </div>
+        <div class="fact">
+          <span class="f-k">play on</span>
+          <span class="f-v" id="gmPlatforms">iOS · Android</span>
+        </div>
+        <div class="fact">
+          <span class="f-k">released</span>
+          <span class="f-v" id="gmReleased">May 20, 2026</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn--line" data-close>close</button>
+        <a class="btn btn--dark" id="gmLink" href="#" target="_blank" rel="noopener">
+          official site <span class="b-ico" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite">
   <i class="fa-solid fa-circle-check" aria-hidden="true"></i><span id="toastMsg">Copied!</span>
 </div>
@@ -746,17 +792,18 @@
     <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.4.2/bundles/skinview3d.bundle.js" defer></script>
 
     <!-- site modules (load order matters) -->
-    <script src="js/00-utils.js?v=2" defer></script>
-    <script src="js/01-images.js?v=2" defer></script>
-    <script src="js/02-avatar.js?v=2" defer></script>
-    <script src="js/03-nav.js?v=2" defer></script>
-    <script src="js/04-ticker.js?v=2" defer></script>
-    <script src="js/05-reveal.js?v=2" defer></script>
-    <script src="js/06-clipboard.js?v=2" defer></script>
-    <script src="js/07-games.js?v=2" defer></script>
-    <script src="js/08-poem.js?v=2" defer></script>
-    <script src="js/09-parallax.js?v=2" defer></script>
-    <script src="js/10-skin.js?v=2" defer></script>
+    <script src="js/00-utils.js?v=3" defer></script>
+    <script src="js/01-images.js?v=3" defer></script>
+    <script src="js/02-avatar.js?v=3" defer></script>
+    <script src="js/03-nav.js?v=3" defer></script>
+    <script src="js/04-ticker.js?v=3" defer></script>
+    <script src="js/05-reveal.js?v=3" defer></script>
+    <script src="js/06-clipboard.js?v=3" defer></script>
+    <script src="js/07-games.js?v=3" defer></script>
+    <script src="js/08-poem.js?v=3" defer></script>
+    <script src="js/09-parallax.js?v=3" defer></script>
+    <script src="js/10-skin.js?v=3" defer></script>
+    <script src="js/11-game-modal.js?v=3" defer></script>
 
 </body>
 </html>

@@ -1518,3 +1518,142 @@ section[id],header[id]{scroll-margin-top:104px}
   .js [data-reveal]{opacity:1;transform:none}
   .ticker-track{animation:none}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   16 · GAME DETAIL MODAL
+   ═══════════════════════════════════════════════════════════ */
+.game{cursor:pointer}
+
+.modal[hidden]{display:none}
+.modal{
+  position:fixed;inset:0;z-index:500;
+  display:grid;place-items:center;
+  padding:24px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+.modal-backdrop{
+  position:fixed;inset:0;
+  background:rgba(23,19,38,.55);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  animation:modalFade .28s var(--ease) both;
+}
+.modal-card{
+  position:relative;
+  width:100%;max-width:560px;
+  background:var(--paper);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.6);
+  animation:modalIn .34s var(--ease) both;
+  margin:auto;
+}
+@keyframes modalFade{from{opacity:0}to{opacity:1}}
+@keyframes modalIn{
+  from{opacity:0;transform:translateY(18px) scale(.97)}
+  to{opacity:1;transform:none}
+}
+
+.modal-x{
+  position:absolute;top:14px;right:14px;z-index:3;
+  width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(255,255,255,.94);
+  color:var(--ink);font-size:.8rem;
+  box-shadow:0 6px 18px -6px rgba(23,19,38,.5);
+  transition:transform .25s var(--ease),background .2s;
+}
+.modal-x:hover{transform:rotate(90deg);background:#fff}
+
+/* the cover art, full width and uncropped-ish */
+.modal-art{
+  position:relative;
+  aspect-ratio:1/.52;
+  overflow:hidden;
+  background:linear-gradient(160deg,var(--plum-2),var(--plum));
+}
+.modal-art img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:50% 18%;
+  display:block;
+}
+.modal-art::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(23,19,38,0) 46%,rgba(23,19,38,.34) 100%);
+  pointer-events:none;
+}
+
+.modal-body{padding:22px 26px 24px}
+
+.modal-kicker{
+  display:flex;align-items:center;gap:7px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.53rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);
+}
+.mk-dot{
+  width:5px;height:5px;border-radius:50%;background:var(--coral);flex:none;
+  box-shadow:0 0 0 3px rgba(242,55,94,.14);
+}
+.modal-title{
+  font-family:var(--serif);font-weight:350;
+  font-size:clamp(1.85rem,4.6vw,2.4rem);
+  line-height:1.02;letter-spacing:-.025em;
+  margin-top:9px;
+}
+.modal-about{
+  font-size:.9rem;line-height:1.7;color:var(--muted);
+  margin-top:12px;
+}
+
+.modal-facts{
+  display:grid;grid-template-columns:1fr 1fr;gap:9px;
+  margin-top:20px;
+}
+.fact{
+  padding:11px 14px;
+  border:1px solid var(--line-soft);
+  border-radius:11px;
+  background:#FBFAFD;
+}
+.fact .f-k{
+  display:block;
+  font-family:var(--mono);font-size:.47rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);
+}
+.fact .f-v{
+  display:block;font-size:.84rem;font-weight:700;color:var(--ink);
+  margin-top:3px;line-height:1.35;
+}
+/* released date spans the full width, it is the longest value */
+.modal-facts .fact:last-child{grid-column:1 / -1}
+
+.modal-actions{
+  display:flex;align-items:center;justify-content:flex-end;gap:9px;
+  margin-top:22px;flex-wrap:wrap;
+}
+.btn--line{
+  padding:10px 18px;border-radius:20px;
+  border:1px solid var(--line);
+  color:var(--ink-2);font-size:.8rem;font-weight:700;
+  transition:all .22s var(--ease);
+}
+.btn--line:hover{background:rgba(23,19,38,.05);color:var(--ink)}
+
+/* keep the page from scrolling behind the modal */
+body.modal-open{overflow:hidden}
+
+@media (max-width:520px){
+  .modal{padding:12px}
+  .modal-card{border-radius:18px}
+  .modal-body{padding:18px 18px 20px}
+  .modal-facts{grid-template-columns:1fr}
+  .modal-art{aspect-ratio:1/.6}
+  .modal-actions{justify-content:stretch}
+  .modal-actions .btn{flex:1;justify-content:center}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .modal-card,.modal-backdrop{animation:none}
+}
