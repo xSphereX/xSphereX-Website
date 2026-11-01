@@ -385,8 +385,19 @@ section[id],header[id]{scroll-margin-top:104px}
   background:linear-gradient(160deg,rgba(255,255,255,.97),rgba(255,255,255,.86));
   border:1px solid rgba(255,255,255,.95);
   box-shadow:var(--shadow-lg);
-  transform:rotate(-.6deg);
+  transform:rotate(-2.2deg);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
 }
+/* straighten on hover (or keyboard focus inside the card) */
+@media (hover:hover){
+  .player-card:hover,
+  .player-card:focus-within{
+    transform:rotate(0deg) translateY(-3px);
+    box-shadow:0 34px 76px -24px rgba(6,41,79,.34);
+  }
+}
+/* touch devices: no sticky hover state, but still straighten on focus */
+.player-card:focus-within{transform:rotate(0deg)}
 /* little washi-tape tab on the top edge */
 .pc-pin{
   position:absolute;top:-13px;left:34px;z-index:3;
