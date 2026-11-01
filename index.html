@@ -1,2436 +1,827 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xSphereX — Profile</title>
-    <meta name="description" content="The personal profile of xSphereX — gamer, anime fan, music lover and creative soul from Germany. Explore my games, music, interests and links.">
-    <meta name="theme-color" content="#7c3aed">
-    <meta name="color-scheme" content="light">
-
-    <!-- Open Graph / social preview -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="xSphereX — Profile">
-    <meta property="og:description" content="Gamer · Anime & Manga · Music Lover · Poetry — welcome to my little corner of the internet.">
-    <meta property="og:image" content="https://cdn.discordapp.com/avatars/735936207162310716/50363a8c4d0114f54bdc8543cd7c42f5.png?size=512">
-    <meta name="twitter:card" content="summary">
-
-    <!-- Favicon (Discord avatar) -->
-    <link rel="icon" type="image/png" href="https://cdn.discordapp.com/avatars/735936207162310716/50363a8c4d0114f54bdc8543cd7c42f5.png?size=128">
-    <link rel="apple-touch-icon" href="https://cdn.discordapp.com/avatars/735936207162310716/50363a8c4d0114f54bdc8543cd7c42f5.png?size=256">
-
-    <script>document.documentElement.classList.add('js');</script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Instrument+Serif:ital@0;1&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        /* ═══════════════════════════════════════════════════
-           DESIGN TOKENS & RESET
-           ═══════════════════════════════════════════════════ */
-        :root {
-            --bg: #f7f4ff;
-            --ink: #23203a;
-            --ink-soft: #55516f;
-            --muted: #6f6a8f;
-
-            --violet: #7c3aed;
-            --violet-soft: #a78bfa;
-            --fuchsia: #d946ef;
-            --rose: #f43f5e;
-            --pink: #fb7185;
-            --amber: #f59e0b;
-            --sky: #0ea5e9;
-            --mint: #10b981;
-
-            --grad-main: linear-gradient(100deg, var(--violet), var(--fuchsia) 55%, var(--pink));
-            --card-bg: rgba(255, 255, 255, 0.72);
-            --card-border: rgba(255, 255, 255, 0.9);
-            --card-shadow: 0 12px 40px rgba(124, 58, 237, 0.10), 0 2px 8px rgba(35, 32, 58, 0.04);
-            --card-shadow-hover: 0 22px 55px rgba(124, 58, 237, 0.18), 0 4px 14px rgba(35, 32, 58, 0.06);
-            --radius: 26px;
-            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-            --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
-            --transition: 0.35s var(--ease-out);
-        }
-
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scrollbar-width: thin;
-            scrollbar-color: var(--violet-soft) var(--bg);
-        }
-
-        body {
-            font-family: 'Outfit', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--ink);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        ::selection {
-            background: var(--violet);
-            color: #fff;
-        }
-
-        ::-webkit-scrollbar { width: 9px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, var(--violet-soft), var(--pink));
-            border-radius: 99px;
-        }
-
-        :focus-visible {
-            outline: 3px solid var(--violet);
-            outline-offset: 3px;
-            border-radius: 8px;
-        }
-
-        section[id], header[id] {
-            scroll-margin-top: 110px;
-        }
-
-        .visually-hidden {
-            position: absolute;
-            width: 1px; height: 1px;
-            overflow: hidden;
-            clip: rect(0 0 0 0);
-            white-space: nowrap;
-        }
-
-        .skip-link {
-            position: fixed;
-            top: -60px;
-            left: 16px;
-            z-index: 200;
-            background: var(--ink);
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: top 0.25s ease;
-        }
-
-        .skip-link:focus { top: 14px; }
-
-        /* ═══════════════════════════════════════════════════
-           BACKGROUND — gradient sky, blobs, particles, grain
-           ═══════════════════════════════════════════════════ */
-        .bg-layer {
-            position: fixed;
-            inset: 0;
-            z-index: 0;
-            overflow: hidden;
-            pointer-events: none;
-            background: linear-gradient(180deg, #f6f2ff 0%, #fdf4ff 42%, #eef6ff 100%);
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.55;
-            will-change: transform;
-        }
-
-        .blob--violet { width: 520px; height: 520px; background: #c4b5fd; top: -160px; left: -120px; animation: blobDrift 24s ease-in-out infinite alternate; }
-        .blob--pink   { width: 460px; height: 460px; background: #f9a8d4; top: 6%; right: -140px; animation: blobDrift 28s ease-in-out infinite alternate-reverse; }
-        .blob--sky    { width: 420px; height: 420px; background: #7dd3fc; top: 46%; left: -160px; opacity: 0.4; animation: blobDrift 30s ease-in-out infinite alternate; }
-        .blob--amber  { width: 360px; height: 360px; background: #fcd34d; bottom: 8%; right: 6%; opacity: 0.38; animation: blobDrift 22s ease-in-out infinite alternate-reverse; }
-        .blob--mint   { width: 320px; height: 320px; background: #6ee7b7; bottom: -120px; left: 30%; opacity: 0.35; animation: blobDrift 26s ease-in-out infinite alternate; }
-
-        @keyframes blobDrift {
-            from { transform: translate(0, 0) scale(1); }
-            to   { transform: translate(70px, 50px) scale(1.12); }
-        }
-
-        #bg-canvas {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .grain {
-            position: fixed;
-            inset: 0;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.05;
-            mix-blend-mode: multiply;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        }
-
-        .page {
-            position: relative;
-            z-index: 2;
-            max-width: 1120px;
-            margin: 0 auto;
-            padding: 0 22px 40px;
-        }
-
-        /* ═══════════════════════════════════════════════════
-           FLOATING PILL NAVIGATION
-           ═══════════════════════════════════════════════════ */
-        .nav-shell {
-            position: fixed;
-            top: 14px;
-            left: 0;
-            right: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            padding: 0 14px;
-            pointer-events: none;
-        }
-
-        .nav-bar {
-            pointer-events: auto;
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 26px;
-            width: 100%;
-            max-width: 880px;
-            padding: 10px 10px 10px 22px;
-            background: rgba(255, 255, 255, 0.78);
-            backdrop-filter: blur(18px) saturate(1.5);
-            -webkit-backdrop-filter: blur(18px) saturate(1.5);
-            border: 1px solid rgba(255, 255, 255, 0.95);
-            border-radius: 999px;
-            box-shadow: 0 10px 35px rgba(124, 58, 237, 0.14);
-            animation: navDrop 0.7s var(--ease-out) both;
-        }
-
-        @keyframes navDrop {
-            from { opacity: 0; transform: translateY(-18px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .nav-logo {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 1.12rem;
-            font-weight: 800;
-            letter-spacing: 0.3px;
-            color: var(--ink);
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        .nav-logo .x {
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 4px;
-            list-style: none;
-            margin: 0 auto;
-        }
-
-        .nav-links a {
-            display: block;
-            padding: 7px 13px;
-            border-radius: 999px;
-            color: var(--ink-soft);
-            text-decoration: none;
-            font-size: 0.86rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover {
-            color: var(--violet);
-            background: rgba(124, 58, 237, 0.09);
-        }
-
-        .clock-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 8px 15px;
-            border-radius: 999px;
-            background: var(--ink);
-            color: #fff;
-            font-size: 0.8rem;
-            font-weight: 600;
-            white-space: nowrap;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .clock-chip i { color: var(--pink); font-size: 0.78rem; }
-        .clock-chip .clock-place { color: rgba(255,255,255,0.55); font-weight: 500; }
-
-        .nav-toggle {
-            display: none;
-            width: 40px;
-            height: 40px;
-            border: none;
-            border-radius: 50%;
-            background: rgba(124, 58, 237, 0.1);
-            color: var(--violet);
-            font-size: 1.05rem;
-            cursor: pointer;
-            flex-shrink: 0;
-        }
-
-        /* ═══════════════════════════════════════════════════
-           HERO
-           ═══════════════════════════════════════════════════ */
-        .hero {
-            position: relative;
-            padding: 150px 0 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 60px -120px auto;
-            height: 520px;
-            background-image: radial-gradient(rgba(124, 58, 237, 0.16) 1.3px, transparent 1.4px);
-            background-size: 22px 22px;
-            -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 42%, #000 30%, transparent 72%);
-            mask-image: radial-gradient(ellipse 60% 60% at 50% 42%, #000 30%, transparent 72%);
-            pointer-events: none;
-        }
-
-        .hero-watermark {
-            position: absolute;
-            top: 96px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-weight: 800;
-            font-size: clamp(6rem, 19vw, 15rem);
-            line-height: 1;
-            letter-spacing: -0.02em;
-            color: rgba(124, 58, 237, 0.05);
-            -webkit-text-stroke: 1.5px rgba(124, 58, 237, 0.14);
-            user-select: none;
-            pointer-events: none;
-            white-space: nowrap;
-            z-index: 0;
-        }
-
-        .hero > *:not(.hero-watermark):not(.floatie) {
-            position: relative;
-            z-index: 1;
-        }
-
-        /* floating decoration chips around the hero */
-        .floatie {
-            position: absolute;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid #fff;
-            box-shadow: 0 12px 30px rgba(124, 58, 237, 0.16);
-            animation: floaty 5.5s ease-in-out infinite;
-            pointer-events: none;
-            /* --px/--py are driven by the JS parallax; the bob comes from the `translate` animation */
-            transform: translate(var(--px, 0px), var(--py, 0px)) rotate(var(--tilt, 0deg));
-        }
-
-        .floatie i { font-size: 1.15rem; }
-        .floatie--game  { width: 54px; height: 54px; top: 190px; left: 7%;  color: var(--violet); --tilt: -8deg; }
-        .floatie--music { width: 48px; height: 48px; top: 250px; right: 8%; color: var(--rose);   --tilt: 7deg;  animation-delay: 0.8s; }
-        .floatie--moon  { width: 44px; height: 44px; top: 410px; left: 12%; color: var(--amber);  --tilt: 6deg;  animation-delay: 1.5s; }
-        .floatie--heart { width: 46px; height: 46px; top: 440px; right: 13%; color: var(--pink);  --tilt: -6deg; animation-delay: 2.1s; }
-        .floatie--star  { width: 40px; height: 40px; top: 150px; right: 22%; color: var(--sky);   --tilt: 10deg; animation-delay: 0.4s; }
-
-        @keyframes floaty {
-            0%, 100% { translate: 0 0; }
-            50%      { translate: 0 -12px; }
-        }
-
-        /* avatar with animated rainbow ring */
-        .avatar-wrap {
-            position: relative;
-            width: 142px;
-            height: 142px;
-            margin-bottom: 26px;
-        }
-
-        @property --ring-angle {
-            syntax: '<angle>';
-            initial-value: 0deg;
-            inherits: false;
-        }
-
-        .avatar-ring {
-            --ring-angle: 0deg;
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            padding: 5px;
-            background: conic-gradient(from var(--ring-angle),
-                var(--violet), var(--fuchsia), var(--pink), var(--amber),
-                var(--sky), var(--mint), var(--violet));
-            animation: ringSpin 7s linear infinite;
-            box-shadow: 0 16px 42px rgba(217, 70, 239, 0.35);
-        }
-
-        @keyframes ringSpin {
-            to { --ring-angle: 360deg; }
-        }
-
-        .avatar-ring .avatar-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            border: 4px solid #fff;
-            background: #e9e4ff;
-        }
-
-        .avatar-decoration {
-            position: absolute;
-            inset: -15px;
-            pointer-events: none;
-            z-index: 2;
-        }
-
-        .avatar-decoration img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .status-dot {
-            position: absolute;
-            right: 7%;
-            bottom: 7%;
-            z-index: 3;
-            width: 22px;
-            height: 22px;
-            background: #22c55e;
-            border: 4px solid #fff;
-            border-radius: 50%;
-            box-shadow: 0 2px 10px rgba(34, 197, 94, 0.55);
-        }
-
-        .status-dot::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            background: rgba(34, 197, 94, 0.45);
-            animation: statusPulse 2.2s ease-out infinite;
-            z-index: -1;
-        }
-
-        @keyframes statusPulse {
-            0%   { transform: scale(0.8); opacity: 0.7; }
-            70%  { transform: scale(1.9); opacity: 0; }
-            100% { transform: scale(1.9); opacity: 0; }
-        }
-
-        .hero-eyebrow {
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            font-size: 1.15rem;
-            color: var(--violet);
-            margin-bottom: 2px;
-        }
-
-        .hero-name {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: clamp(3rem, 9vw, 5.2rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            line-height: 1.02;
-            background: linear-gradient(95deg, var(--violet) 5%, var(--fuchsia) 45%, var(--pink) 80%, var(--amber));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 6px 22px rgba(217, 70, 239, 0.22));
-        }
-
-        .hero-chips {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-            justify-content: center;
-            margin-top: 18px;
-        }
-
-        .info-chip {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 7px 15px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.85);
-            border: 1px solid #fff;
-            box-shadow: 0 6px 18px rgba(124, 58, 237, 0.10);
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--ink-soft);
-        }
-
-        .info-chip i { font-size: 0.8rem; }
-        .info-chip:nth-child(1) i { color: var(--pink); }
-        .info-chip:nth-child(2) i { color: var(--rose); }
-        .info-chip:nth-child(3) i { color: var(--violet); }
-
-        .typewriter-line {
-            margin-top: 20px;
-            font-size: 1.02rem;
-            color: var(--ink-soft);
-            min-height: 1.7em;
-        }
-
-        .typewriter-line .tw-label {
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            color: var(--muted);
-            margin-right: 6px;
-        }
-
-        #typewriter {
-            font-weight: 700;
-            color: var(--ink);
-        }
-
-        .tw-caret {
-            display: inline-block;
-            width: 2.5px;
-            height: 1.05em;
-            margin-left: 2px;
-            vertical-align: -0.18em;
-            background: var(--fuchsia);
-            border-radius: 2px;
-            animation: caretBlink 0.9s steps(1) infinite;
-        }
-
-        @keyframes caretBlink {
-            0%, 55% { opacity: 1; }
-            56%, 100% { opacity: 0; }
-        }
-
-        /* sticker badges */
-        .hero-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 26px;
-            max-width: 620px;
-        }
-
-        .sticker {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 999px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border: 2px solid #fff;
-            box-shadow: 0 8px 20px rgba(35, 32, 58, 0.12);
-            transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
-            cursor: default;
-        }
-
-        .sticker:hover {
-            transform: rotate(0deg) scale(1.08) translateY(-2px) !important;
-            box-shadow: 0 14px 28px rgba(35, 32, 58, 0.16);
-        }
-
-        .sticker--violet { background: #ede9fe; color: var(--violet); transform: rotate(-2deg); }
-        .sticker--pink   { background: #ffe4e6; color: var(--rose);   transform: rotate(1.6deg); }
-        .sticker--amber  { background: #fef3c7; color: #b45309;       transform: rotate(-1.4deg); }
-        .sticker--sky    { background: #e0f2fe; color: #0369a1;       transform: rotate(2deg); }
-        .sticker--mint   { background: #d1fae5; color: #047857;       transform: rotate(-1.8deg); }
-
-        .hero-cta {
-            display: flex;
-            gap: 13px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 32px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            padding: 13px 26px;
-            border-radius: 999px;
-            font-family: inherit;
-            font-size: 0.92rem;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease;
-        }
-
-        .btn--primary {
-            background: var(--grad-main);
-            color: #fff;
-            box-shadow: 0 12px 30px rgba(217, 70, 239, 0.38);
-        }
-
-        .btn--primary:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 18px 38px rgba(217, 70, 239, 0.45);
-        }
-
-        .btn--white {
-            background: #fff;
-            color: var(--ink);
-            box-shadow: 0 10px 26px rgba(35, 32, 58, 0.10);
-            border: 1px solid rgba(124, 58, 237, 0.14);
-        }
-
-        .btn--white:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 16px 32px rgba(35, 32, 58, 0.14);
-        }
-
-        .btn--white .fa-discord { color: #5865F2; font-size: 1.05rem; }
-
-        .scroll-cue {
-            margin-top: 46px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            color: var(--muted);
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            text-decoration: none;
-        }
-
-        .scroll-cue i {
-            font-size: 0.95rem;
-            color: var(--violet-soft);
-            animation: scrollBounce 2.2s ease-in-out infinite;
-        }
-
-        @keyframes scrollBounce {
-            0%, 100% { transform: translateY(0); }
-            50%      { transform: translateY(7px); }
-        }
-
-        /* hero entrance */
-        .pop-in { animation: popIn 0.75s var(--ease-bounce) both; }
-        .pop-in--1 { animation-delay: 0.08s; }
-        .pop-in--2 { animation-delay: 0.18s; }
-        .pop-in--3 { animation-delay: 0.3s; }
-        .pop-in--4 { animation-delay: 0.42s; }
-        .pop-in--5 { animation-delay: 0.54s; }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: translateY(26px) scale(0.96); }
-            to   { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* ═══════════════════════════════════════════════════
-           MARQUEE BANDS
-           ═══════════════════════════════════════════════════ */
-        .marquee-zone {
-            position: relative;
-            margin: 26px calc(50% - 50vw) 10px;
-            height: 104px;
-            pointer-events: none;
-        }
-
-        .marquee {
-            position: absolute;
-            left: -2%;
-            width: 104%;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 11px 0;
-            box-shadow: 0 14px 34px rgba(124, 58, 237, 0.18);
-        }
-
-        .marquee--back {
-            top: 30px;
-            transform: rotate(1.4deg);
-            background: #fff;
-            color: var(--violet);
-            border-top: 1px solid rgba(124, 58, 237, 0.12);
-            border-bottom: 1px solid rgba(124, 58, 237, 0.12);
-            box-shadow: none;
-        }
-
-        .marquee--front {
-            top: 22px;
-            transform: rotate(-1.4deg);
-            background: var(--grad-main);
-            color: #fff;
-            z-index: 2;
-        }
-
-        .marquee-track {
-            display: inline-flex;
-            align-items: center;
-            gap: 0;
-            animation: marqueeScroll 26s linear infinite;
-            will-change: transform;
-        }
-
-        .marquee--back .marquee-track {
-            animation-direction: reverse;
-            animation-duration: 32s;
-        }
-
-        .marquee-track span {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-weight: 700;
-            font-size: 0.92rem;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            padding: 0 14px;
-        }
-
-        .marquee-track .mq-star { font-size: 0.8rem; opacity: 0.85; padding: 0; }
-
-        @keyframes marqueeScroll {
-            to { transform: translateX(-50%); }
-        }
-
-        /* ═══════════════════════════════════════════════════
-           SECTIONS & BENTO GRID
-           ═══════════════════════════════════════════════════ */
-        .section { padding: 54px 0 10px; }
-
-        .section-head {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-
-        .section-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 7px 15px;
-            border-radius: 999px;
-            background: var(--ink);
-            color: #fff;
-            font-size: 0.74rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transform: rotate(-1.5deg);
-            box-shadow: 0 8px 20px rgba(35, 32, 58, 0.22);
-        }
-
-        .section-label i { color: var(--pink); }
-
-        .section-title {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: clamp(1.7rem, 4vw, 2.3rem);
-            font-weight: 800;
-            letter-spacing: -0.015em;
-            color: var(--ink);
-        }
-
-        .section-title .grad {
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .bento {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            position: relative;
-            background: var(--card-bg);
-            backdrop-filter: blur(14px) saturate(1.4);
-            -webkit-backdrop-filter: blur(14px) saturate(1.4);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius);
-            box-shadow: var(--card-shadow);
-            padding: 26px;
-            transition: transform var(--transition), box-shadow var(--transition);
-        }
-
-        .card:hover { box-shadow: var(--card-shadow-hover); }
-
-        .span-2 { grid-column: span 2; }
-        .span-4 { grid-column: span 4; }
-        .row-2  { grid-row: span 2; }
-
-        .card-sparkle {
-            position: absolute;
-            top: 14px;
-            right: 18px;
-            font-size: 0.95rem;
-            color: var(--amber);
-            opacity: 0.75;
-            animation: sparkleSpin 7s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes sparkleSpin {
-            to { transform: rotate(360deg); }
-        }
-
-        .card-head {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 18px;
-        }
-
-        .card-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.05rem;
-            flex-shrink: 0;
-            transform: rotate(-4deg);
-        }
-
-        .card-icon--violet { background: #ede9fe; color: var(--violet); }
-        .card-icon--rose   { background: #ffe4e6; color: var(--rose); }
-        .card-icon--amber  { background: #fef3c7; color: #b45309; }
-        .card-icon--sky    { background: #e0f2fe; color: #0369a1; }
-        .card-icon--mint   { background: #d1fae5; color: #047857; }
-        .card-icon--pink   { background: #fce7f3; color: #be185d; }
-
-        .card-head h3 {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 1.12rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        .card-head .card-sub {
-            display: block;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.78rem;
-            font-weight: 500;
-            color: var(--muted);
-            letter-spacing: 0;
-        }
-
-        /* ═══════════════════════════════════════════════════
-           MINECRAFT 3D CARD
-           ═══════════════════════════════════════════════════ */
-        .mc-card {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .drag-chip {
-            margin-left: auto;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 5px 12px;
-            border-radius: 999px;
-            background: var(--grad-main);
-            color: #fff;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.6px;
-            text-transform: uppercase;
-            transform: rotate(2deg);
-            box-shadow: 0 6px 16px rgba(217, 70, 239, 0.35);
-        }
-
-        .skin-stage {
-            position: relative;
-            flex: 1;
-            min-height: 380px;
-            border-radius: 20px;
-            overflow: hidden;
-            background:
-                radial-gradient(ellipse 75% 55% at 50% 88%, rgba(124, 58, 237, 0.20), transparent 70%),
-                radial-gradient(circle at 18% 14%, rgba(251, 113, 133, 0.20), transparent 46%),
-                radial-gradient(circle at 84% 22%, rgba(56, 189, 248, 0.20), transparent 48%),
-                linear-gradient(180deg, #f3efff 0%, #fdf2ff 58%, #ffeef4 100%);
-            border: 1px solid rgba(124, 58, 237, 0.10);
-        }
-
-        .skin-stage::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(124, 58, 237, 0.13) 1.2px, transparent 1.3px);
-            background-size: 20px 20px;
-            -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 20%, transparent 75%);
-            mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 20%, transparent 75%);
-        }
-
-        #skinCanvas {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-            cursor: grab;
-        }
-
-        #skinCanvas:active { cursor: grabbing; }
-
-        .skin-fallback {
-            position: absolute;
-            left: 50%;
-            bottom: 7%;
-            transform: translateX(-50%);
-            height: 82%;
-            image-rendering: pixelated;
-            filter: drop-shadow(0 18px 22px rgba(124, 58, 237, 0.30));
-            animation: skinFloat 4.5s ease-in-out infinite;
-            transition: opacity 0.5s ease;
-        }
-
-        @keyframes skinFloat {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50%      { transform: translateX(-50%) translateY(-7px); }
-        }
-
-        .skin-fallback.hidden { opacity: 0; pointer-events: none; }
-
-        .skin-status {
-            position: absolute;
-            left: 50%;
-            bottom: 12px;
-            transform: translateX(-50%);
-            padding: 5px 13px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(6px);
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: var(--ink-soft);
-            white-space: nowrap;
-            pointer-events: none;
-        }
-
-        .mc-controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 16px;
-            align-items: center;
-        }
-
-        .anim-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 8px 15px;
-            border-radius: 999px;
-            border: 1.5px solid rgba(124, 58, 237, 0.18);
-            background: #fff;
-            color: var(--ink-soft);
-            font-family: inherit;
-            font-size: 0.82rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.25s var(--ease-out);
-        }
-
-        .anim-btn:hover {
-            border-color: var(--violet-soft);
-            color: var(--violet);
-            transform: translateY(-2px);
-        }
-
-        .anim-btn.active {
-            background: var(--grad-main);
-            border-color: transparent;
-            color: #fff;
-            box-shadow: 0 8px 20px rgba(217, 70, 239, 0.35);
-        }
-
-        .anim-btn--icon { padding: 8px 12px; }
-        .anim-btn--icon.active { background: var(--ink); box-shadow: 0 8px 20px rgba(35, 32, 58, 0.3); }
-
-        .mc-controls .spacer { flex: 1; }
-
-        .mc-foot {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 18px;
-            padding-top: 18px;
-            border-top: 1.5px dashed rgba(124, 58, 237, 0.18);
-            flex-wrap: wrap;
-        }
-
-        .mc-username {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-        }
-
-        .mc-platform {
-            padding: 4px 11px;
-            border-radius: 999px;
-            background: #d1fae5;
-            color: #047857;
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .copy-btn {
-            margin-left: auto;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 8px 15px;
-            border-radius: 999px;
-            border: none;
-            background: var(--ink);
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.8rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: transform 0.25s var(--ease-bounce), background 0.25s ease;
-        }
-
-        .copy-btn:hover { transform: translateY(-2px); background: var(--violet); }
-
-        /* ═══════════════════════════════════════════════════
-           GAMES & PLAYSTYLE
-           ═══════════════════════════════════════════════════ */
-        .game-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-
-        .game-row a {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 12px 16px 12px 12px;
-            border-radius: 18px;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1.5px solid rgba(124, 58, 237, 0.08);
-            text-decoration: none;
-            color: var(--ink);
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.28s var(--ease-out);
-        }
-
-        .game-row a:hover {
-            transform: translateX(6px);
-            border-color: rgba(124, 58, 237, 0.28);
-            box-shadow: 0 10px 24px rgba(124, 58, 237, 0.12);
-        }
-
-        .game-logo-wrap {
-            width: 46px;
-            height: 46px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            overflow: hidden;
-        }
-
-        .game-row:nth-child(1) .game-logo-wrap { background: #ede9fe; }
-        .game-row:nth-child(2) .game-logo-wrap { background: #e0f2fe; }
-        .game-row:nth-child(3) .game-logo-wrap { background: #d1fae5; }
-
-        .game-logo {
-            width: 30px;
-            height: 30px;
-            object-fit: contain;
-            border-radius: 7px;
-            transition: transform 0.3s var(--ease-bounce);
-        }
-
-        .game-row a:hover .game-logo { transform: scale(1.18) rotate(-5deg); }
-
-        .game-arrow {
-            margin-left: auto;
-            font-size: 0.8rem;
-            color: var(--muted);
-            transition: all 0.28s var(--ease-out);
-        }
-
-        .game-row a:hover .game-arrow {
-            color: var(--violet);
-            transform: translate(2px, -2px);
-        }
-
-        .playstyle-text {
-            font-size: 0.95rem;
-            color: var(--ink-soft);
-            line-height: 1.75;
-            margin-bottom: 16px;
-        }
-
-        .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
-
-        .tag {
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 0.8rem;
-            font-weight: 700;
-        }
-
-        .tag--violet { background: #ede9fe; color: var(--violet); }
-        .tag--rose   { background: #ffe4e6; color: var(--rose); }
-        .tag--sky    { background: #e0f2fe; color: #0369a1; }
-
-        /* ═══════════════════════════════════════════════════
-           MUSIC
-           ═══════════════════════════════════════════════════ */
-        .vinyl {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            background:
-                radial-gradient(circle, var(--pink) 0 26%, transparent 27%),
-                repeating-radial-gradient(circle, #23203a 0 2px, #353152 2px 4px);
-            box-shadow: 0 6px 16px rgba(35, 32, 58, 0.3);
-            animation: vinylSpin 3.5s linear infinite;
-        }
-
-        @keyframes vinylSpin { to { transform: rotate(360deg); } }
-
-        .spotify-wrap {
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(124, 58, 237, 0.12);
-            box-shadow: 0 10px 26px rgba(35, 32, 58, 0.10);
-            background: #191414;
-        }
-
-        .spotify-wrap iframe {
-            width: 100%;
-            height: 152px;
-            border: none;
-            display: block;
-        }
-
-        .music-note {
-            margin-top: 18px;
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            font-size: 1.08rem;
-            line-height: 1.65;
-            color: var(--ink-soft);
-        }
-
-        .music-note .highlight {
-            font-style: normal;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-            font-size: 0.95rem;
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* numbered list (artists & anime) */
-        .ranked-list { list-style: none; display: flex; flex-direction: column; gap: 4px; counter-reset: rank; }
-
-        .ranked-list li {
-            counter-increment: rank;
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            padding: 9px 10px;
-            border-radius: 13px;
-            font-weight: 600;
-            font-size: 0.94rem;
-            color: var(--ink-soft);
-            transition: all 0.25s var(--ease-out);
-        }
-
-        .ranked-list li::before {
-            content: counter(rank, decimal-leading-zero);
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-weight: 800;
-            font-size: 0.8rem;
-            width: 34px;
-            height: 34px;
-            border-radius: 11px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transform: rotate(-4deg);
-            transition: transform 0.3s var(--ease-bounce);
-        }
-
-        .ranked-list li:nth-child(5n+1)::before { background: #ede9fe; color: var(--violet); }
-        .ranked-list li:nth-child(5n+2)::before { background: #ffe4e6; color: var(--rose); }
-        .ranked-list li:nth-child(5n+3)::before { background: #fef3c7; color: #b45309; }
-        .ranked-list li:nth-child(5n+4)::before { background: #e0f2fe; color: #0369a1; }
-        .ranked-list li:nth-child(5n+5)::before { background: #d1fae5; color: #047857; }
-
-        .ranked-list li:hover {
-            background: rgba(255, 255, 255, 0.85);
-            color: var(--ink);
-            transform: translateX(5px);
-        }
-
-        .ranked-list li:hover::before { transform: rotate(4deg) scale(1.1); }
-
-        /* ═══════════════════════════════════════════════════
-           QUOTE BAND
-           ═══════════════════════════════════════════════════ */
-        .quote-card {
-            position: relative;
-            border-radius: 30px;
-            padding: 52px 46px;
-            text-align: center;
-            border: 2px solid transparent;
-            background:
-                linear-gradient(rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.86)) padding-box,
-                linear-gradient(110deg, var(--violet), var(--fuchsia), var(--amber), var(--sky)) border-box;
-            box-shadow: 0 20px 50px rgba(124, 58, 237, 0.14);
-            overflow: hidden;
-        }
-
-        .quote-card::before {
-            content: '“';
-            position: absolute;
-            top: -38px;
-            left: 26px;
-            font-family: 'Instrument Serif', serif;
-            font-size: 11rem;
-            line-height: 1;
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            opacity: 0.16;
-            pointer-events: none;
-        }
-
-        .quote-stars {
-            color: var(--amber);
-            letter-spacing: 10px;
-            font-size: 0.85rem;
-            margin-bottom: 18px;
-        }
-
-        .quote-text {
-            font-family: 'Instrument Serif', serif;
-            font-style: italic;
-            font-size: clamp(1.25rem, 3.2vw, 1.6rem);
-            line-height: 1.85;
-            color: var(--ink);
-            max-width: 680px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .quote-text .em {
-            font-style: normal;
-            font-weight: 400;
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            white-space: nowrap;
-        }
-
-        .quote-sign {
-            margin-top: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: var(--muted);
-        }
-
-        /* ═══════════════════════════════════════════════════
-           INTERESTS
-           ═══════════════════════════════════════════════════ */
-        .pill-cloud { display: flex; flex-wrap: wrap; gap: 9px; }
-
-        .char-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            padding: 8px 15px;
-            border-radius: 999px;
-            font-size: 0.86rem;
-            font-weight: 700;
-            border: 2px solid #fff;
-            box-shadow: 0 5px 14px rgba(35, 32, 58, 0.08);
-            transition: transform 0.28s var(--ease-bounce);
-            cursor: default;
-        }
-
-        .char-pill i { font-size: 0.68rem; }
-        .char-pill:hover { transform: scale(1.07) rotate(-1.5deg); }
-        .char-pill:nth-child(5n+1) { background: #ffe4e6; color: #be123c; }
-        .char-pill:nth-child(5n+2) { background: #ede9fe; color: var(--violet); }
-        .char-pill:nth-child(5n+3) { background: #fce7f3; color: #be185d; }
-        .char-pill:nth-child(5n+4) { background: #fef3c7; color: #b45309; }
-        .char-pill:nth-child(5n+5) { background: #e0f2fe; color: #0369a1; }
-
-        .tick-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
-
-        .tick-list li {
-            display: flex;
-            align-items: flex-start;
-            gap: 11px;
-            font-size: 0.93rem;
-            font-weight: 500;
-            color: var(--ink-soft);
-            line-height: 1.55;
-        }
-
-        .tick-list li::before {
-            content: '✦';
-            font-size: 0.72rem;
-            margin-top: 4px;
-            flex-shrink: 0;
-        }
-
-        .tick-list--violet li::before { color: var(--violet); }
-        .tick-list--sky li::before { color: var(--sky); }
-
-        /* ═══════════════════════════════════════════════════
-           SOCIAL TILES
-           ═══════════════════════════════════════════════════ */
-        .social-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr 1fr;
-            gap: 20px;
-        }
-
-        .social-tile {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 24px;
-            border-radius: var(--radius);
-            background: var(--card-bg);
-            backdrop-filter: blur(14px) saturate(1.4);
-            -webkit-backdrop-filter: blur(14px) saturate(1.4);
-            border: 1px solid var(--card-border);
-            box-shadow: var(--card-shadow);
-            text-decoration: none;
-            color: var(--ink);
-            overflow: hidden;
-            transition: transform var(--transition), box-shadow var(--transition);
-        }
-
-        .social-tile:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--card-shadow-hover);
-        }
-
-        .social-tile::after {
-            content: '';
-            position: absolute;
-            right: -34px;
-            bottom: -34px;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            opacity: 0.14;
-            transition: transform 0.45s var(--ease-out), opacity 0.45s ease;
-        }
-
-        .social-tile:hover::after { transform: scale(1.7); opacity: 0.22; }
-        .social-tile--discord::after { background: #5865F2; }
-        .social-tile--tiktok::after  { background: #fe2c55; }
-        .social-tile--spotify::after { background: #1DB954; }
-
-        .social-icon {
-            width: 54px;
-            height: 54px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            transform: rotate(-4deg);
-            transition: transform 0.35s var(--ease-bounce);
-            position: relative;
-            z-index: 1;
-        }
-
-        .social-tile:hover .social-icon { transform: rotate(4deg) scale(1.08); }
-
-        .social-icon--discord { background: #5865F2; color: #fff; box-shadow: 0 10px 22px rgba(88, 101, 242, 0.4); }
-        .social-icon--tiktok  { background: var(--ink); color: #fff; box-shadow: 0 10px 22px rgba(35, 32, 58, 0.35); }
-        .social-icon--spotify { background: #1DB954; color: #fff; box-shadow: 0 10px 22px rgba(29, 185, 84, 0.4); }
-
-        .social-info { position: relative; z-index: 1; min-width: 0; }
-
-        .social-info h4 {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-        }
-
-        .social-info span {
-            font-size: 0.84rem;
-            color: var(--muted);
-            font-weight: 500;
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .social-tile .tile-arrow {
-            margin-left: auto;
-            position: relative;
-            z-index: 1;
-            color: var(--muted);
-            transition: all 0.3s var(--ease-out);
-            flex-shrink: 0;
-        }
-
-        .social-tile:hover .tile-arrow { color: var(--ink); transform: translateX(4px); }
-
-        .tile-copy {
-            position: relative;
-            z-index: 2;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 9px;
-            padding: 6px 13px;
-            border-radius: 999px;
-            border: none;
-            background: rgba(88, 101, 242, 0.12);
-            color: #4752c4;
-            font-family: inherit;
-            font-size: 0.76rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-
-        .tile-copy:hover { background: #5865F2; color: #fff; }
-
-        /* ═══════════════════════════════════════════════════
-           FOOTER / TOAST / BACK-TO-TOP
-           ═══════════════════════════════════════════════════ */
-        .footer {
-            margin-top: 70px;
-            padding: 30px 0 26px;
-            text-align: center;
-            border-top: 1.5px dashed rgba(124, 58, 237, 0.22);
-            color: var(--muted);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .footer .foot-logo {
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-weight: 800;
-            color: var(--ink);
-            font-size: 1rem;
-            display: block;
-            margin-bottom: 6px;
-        }
-
-        .footer .foot-logo .x {
-            background: var(--grad-main);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .footer .spark { color: var(--fuchsia); }
-
-        .toast {
-            position: fixed;
-            left: 50%;
-            bottom: 26px;
-            transform: translate(-50%, 90px);
-            z-index: 150;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 13px 22px;
-            border-radius: 999px;
-            background: var(--ink);
-            color: #fff;
-            font-size: 0.88rem;
-            font-weight: 600;
-            box-shadow: 0 18px 40px rgba(35, 32, 58, 0.35);
-            opacity: 0;
-            transition: transform 0.45s var(--ease-bounce), opacity 0.35s ease;
-            pointer-events: none;
-            max-width: calc(100vw - 32px);
-            text-align: center;
-        }
-
-        .toast.show { transform: translate(-50%, 0); opacity: 1; }
-        .toast i { color: #4ade80; }
-
-        .to-top {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            z-index: 120;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: 1px solid #fff;
-            background: var(--grad-main);
-            color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
-            box-shadow: 0 12px 28px rgba(217, 70, 239, 0.4);
-            opacity: 0;
-            transform: translateY(16px) scale(0.85);
-            pointer-events: none;
-            transition: all 0.35s var(--ease-bounce);
-        }
-
-        .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
-        .to-top:hover { transform: translateY(-4px) scale(1.06); }
-
-        /* scroll reveal (only hidden when JS is available) */
-        .js [data-reveal] {
-            opacity: 0;
-            transform: translateY(28px) scale(0.98);
-            transition: opacity 0.7s ease var(--d, 0s), transform 0.7s var(--ease-out) var(--d, 0s);
-        }
-
-        .js [data-reveal].revealed { opacity: 1; transform: none; }
-
-        /* subtle 3D tilt (JS-driven, transform handled inline) */
-        .tilt { transform-style: preserve-3d; will-change: transform; }
-
-        /* ═══════════════════════════════════════════════════
-           RESPONSIVE
-           ═══════════════════════════════════════════════════ */
-        @media (max-width: 960px) {
-            .bento { grid-template-columns: repeat(2, 1fr); }
-            .span-4 { grid-column: span 2; }
-            .row-2 { grid-row: auto; }
-            .mc-card { grid-column: span 2; }
-            .skin-stage { min-height: 400px; }
-            .floatie--moon, .floatie--heart { display: none; }
-        }
-
-        @media (max-width: 760px) {
-            .nav-bar { gap: 12px; padding: 8px 8px 8px 18px; border-radius: 26px; }
-            .clock-chip .clock-place { display: none; }
-            .nav-toggle { display: block; }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: calc(100% + 10px);
-                left: 0;
-                right: 0;
-                flex-direction: column;
-                gap: 2px;
-                padding: 12px;
-                background: rgba(255, 255, 255, 0.96);
-                backdrop-filter: blur(18px);
-                border: 1px solid #fff;
-                border-radius: 22px;
-                box-shadow: 0 20px 45px rgba(124, 58, 237, 0.2);
-            }
-
-            .nav-links.open { display: flex; animation: popIn 0.35s var(--ease-out) both; }
-            .nav-links a { padding: 11px 14px; font-size: 0.95rem; }
-
-            .hero { padding-top: 130px; }
-            .hero-watermark { top: 80px; }
-            .floatie { display: none; }
-
-            .social-grid { grid-template-columns: 1fr; }
-            .quote-card { padding: 40px 26px; }
-        }
-
-        @media (max-width: 560px) {
-            .bento { grid-template-columns: 1fr; }
-            .span-2, .span-4, .mc-card { grid-column: span 1; }
-            .skin-stage { min-height: 360px; }
-            .page { padding: 0 16px 30px; }
-            .card { padding: 22px; }
-            .avatar-wrap { width: 124px; height: 124px; }
-            .hero-cta .btn { padding: 12px 20px; }
-            .marquee-zone { height: 92px; }
-        }
-
-        /* ═══════════════════════════════════════════════════
-           REDUCED MOTION
-           ═══════════════════════════════════════════════════ */
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-            .js [data-reveal] { opacity: 1; transform: none; }
-            .marquee-track { animation: none; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>sphere — games, music &amp; a little poetry</title>
+<meta name="description" content="Sphere (xSphereX) — gamer, music collector and occasional poet. My favourite games, the music on repeat, my Minecraft skin and everywhere you can find me.">
+<meta name="theme-color" content="#F7F8FA">
+<meta name="color-scheme" content="light">
+<meta property="og:type" content="website">
+<meta property="og:title" content="sphere — games, music &amp; a little poetry">
+<meta property="og:description" content="Gamer · music collector · occasional poet. My corner of the internet.">
+<meta property="og:image" content="https://cdn.discordapp.com/avatars/735936207162310716/c395de37de1d91ee3d95c1884e6c79dc.png?size=512">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="https://cdn.discordapp.com/avatars/735936207162310716/c395de37de1d91ee3d95c1884e6c79dc.png?size=64">
+<link rel="apple-touch-icon" href="https://cdn.discordapp.com/avatars/735936207162310716/c395de37de1d91ee3d95c1884e6c79dc.png?size=180">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="preload" as="image" href="assets/starrail-v6.webp">
+    <link rel="stylesheet" href="css/style.css?v=20">
+    <noscript><style>
+      /* no JS: show everything the scripts would normally reveal */
+      [data-reveal]{opacity:1 !important;transform:none !important}
+    </style></noscript>
 </head>
 <body>
-    <a class="skip-link" href="#gaming">Skip to content</a>
+<a class="skip" href="#games">Skip to content</a>
 
-    <!-- Background -->
-    <div class="bg-layer" aria-hidden="true">
-        <div class="blob blob--violet"></div>
-        <div class="blob blob--pink"></div>
-        <div class="blob blob--sky"></div>
-        <div class="blob blob--amber"></div>
-        <div class="blob blob--mint"></div>
-        <canvas id="bg-canvas"></canvas>
-    </div>
-    <div class="grain" aria-hidden="true"></div>
+<div class="wash" aria-hidden="true"></div>
 
-    <!-- Floating pill navigation -->
-    <div class="nav-shell">
-        <nav class="nav-bar" aria-label="Main navigation">
-            <a href="#profile" class="nav-logo"><span class="x">x</span>Sphere<span class="x">X</span></a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#profile">Profile</a></li>
-                <li><a href="#gaming">Gaming</a></li>
-                <li><a href="#music">Music</a></li>
-                <li><a href="#words">Words</a></li>
-                <li><a href="#interests">Interests</a></li>
-                <li><a href="#links">Links</a></li>
-            </ul>
-            <span class="clock-chip" title="My local time in Germany">
-                <i class="fa-solid fa-clock" aria-hidden="true"></i>
-                <span id="localTime">--:--</span>
-                <span class="clock-place">Germany</span>
-            </span>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
-                <i class="fa-solid fa-bars" aria-hidden="true"></i>
-            </button>
-        </nav>
-    </div>
+<div class="page">
 
-    <div class="page">
+<!-- ══════════ NAV ══════════ -->
+<div class="nav-shell">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="#home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+          <circle cx="12" cy="12" r="8.4"/>
+          <ellipse cx="12" cy="12" rx="8.6" ry="3.5" transform="rotate(-24 12 12)" stroke-width="1.5"/>
+        </svg>
+      </span>
+      <span class="brand-name">sphere.</span>
+      <span class="brand-handle">@xSphereXx</span>
+    </a>
 
-        <!-- ══════ HERO ══════ -->
-        <header class="hero" id="profile">
-            <div class="hero-watermark" aria-hidden="true">SPHERE</div>
+    <ul class="nav-list" id="navList">
+      <li><a href="#home"      data-nav="home">home</a></li>
+      <li><a href="#games"     data-nav="games">games</a></li>
+      <li><a href="#music"     data-nav="music">music</a></li>
+      <li><a href="#skin"      data-nav="skin">my skin</a></li>
+      <li><a href="#poem"      data-nav="poem">poem</a></li>
+      <li><a href="#socials"   data-nav="socials">socials</a></li>
+    </ul>
 
-            <div class="floatie floatie--game" data-parallax="18" aria-hidden="true"><i class="fa-solid fa-gamepad"></i></div>
-            <div class="floatie floatie--music" data-parallax="-14" aria-hidden="true"><i class="fa-solid fa-music"></i></div>
-            <div class="floatie floatie--moon" data-parallax="10" aria-hidden="true"><i class="fa-solid fa-moon"></i></div>
-            <div class="floatie floatie--heart" data-parallax="-20" aria-hidden="true"><i class="fa-solid fa-heart"></i></div>
-            <div class="floatie floatie--star" data-parallax="24" aria-hidden="true"><i class="fa-solid fa-star"></i></div>
+    <a class="nav-cta" href="#socials">say hi <span aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span></a>
 
-            <div class="avatar-wrap pop-in">
-                <div class="avatar-ring">
-                    <img class="avatar-img" src="https://cdn.discordapp.com/avatars/735936207162310716/50363a8c4d0114f54bdc8543cd7c42f5.png?size=256" alt="xSphereX avatar" width="132" height="132">
-                </div>
-                <div class="avatar-decoration" aria-hidden="true">
-                    <img src="https://cdn.discordapp.com/avatar-decoration-presets/a_2778152b82fc1fa72b55bb8076fe6f1b.png" alt="" width="172" height="172">
-                </div>
-                <span class="status-dot" role="img" aria-label="Online"></span>
-            </div>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="navList">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+  </nav>
+</div>
 
-            <p class="hero-eyebrow pop-in pop-in--1">hey, welcome to my corner of the internet — I'm</p>
-            <h1 class="hero-name pop-in pop-in--1">xSphereX</h1>
+<!-- ══════════ HERO ══════════ -->
+<header class="hero" id="home">
+  <div class="wrap">
+    <div class="hero-grid">
 
-            <div class="hero-chips pop-in pop-in--2">
-                <span class="info-chip"><i class="fa-solid fa-cake-candles" aria-hidden="true"></i> 16</span>
-                <span class="info-chip"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> German</span>
-                <span class="info-chip"><i class="fa-solid fa-wand-magic-Sparkles" aria-hidden="true"></i> Creative Soul</span>
-            </div>
+      <div class="hero-copy" data-reveal>
+        <span class="chip"><i aria-hidden="true"></i>@xSphereXx · welcome in</span>
 
-            <p class="typewriter-line pop-in pop-in--3" aria-label="Currently into gaming, anime, music and poetry">
-                <span class="tw-label">currently</span><span id="typewriter" aria-hidden="true"></span><span class="tw-caret" aria-hidden="true"></span>
-            </p>
+        <h1 class="display">Hi, I&rsquo;m<br><em>Sphere.</em><span class="spark" aria-hidden="true">✦</span></h1>
 
-            <div class="hero-badges pop-in pop-in--4">
-                <span class="sticker sticker--violet"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Gamer</span>
-                <span class="sticker sticker--pink"><i class="fa-solid fa-dragon" aria-hidden="true"></i> Anime &amp; Manga</span>
-                <span class="sticker sticker--amber"><i class="fa-solid fa-music" aria-hidden="true"></i> Music Lover</span>
-                <span class="sticker sticker--sky"><i class="fa-solid fa-feather-pointed" aria-hidden="true"></i> Poetry</span>
-                <span class="sticker sticker--mint"><i class="fa-solid fa-moon" aria-hidden="true"></i> Night Aesthetic</span>
-            </div>
+        <p class="hero-sub">Games, music, and a little bit of poetry.</p>
 
-            <div class="hero-cta pop-in pop-in--5">
-                <a href="#gaming" class="btn btn--primary"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Explore my world</a>
-                <button type="button" class="btn btn--white" data-copy="xbluereaperx" data-copy-msg="Discord username copied — see you there!">
-                    <i class="fa-brands fa-discord" aria-hidden="true"></i> Copy my Discord
-                </button>
-            </div>
+        <p class="hero-lead">
+          Hey, I&rsquo;m Sphere. Online I go by xSphereX — this is my little corner
+          of the internet: the games I keep coming back to, the music I have on
+          repeat, my Minecraft skin, and everywhere you can find me.
+        </p>
 
-            <a class="scroll-cue" href="#gaming">scroll <i class="fa-solid fa-chevron-down" aria-hidden="true"></i></a>
-        </header>
-
-        <!-- ══════ MARQUEE BANDS ══════ -->
-        <div class="marquee-zone" aria-hidden="true">
-            <div class="marquee marquee--back">
-                <div class="marquee-track" data-marquee>
-                    <span>Poetry</span><span class="mq-star">✦</span><span>Night Vibes</span><span class="mq-star">✦</span><span>Minecraft</span><span class="mq-star">✦</span><span>Star Rail</span><span class="mq-star">✦</span><span>Toradora!</span><span class="mq-star">✦</span><span>Melodies</span><span class="mq-star">✦</span>
-                </div>
-            </div>
-            <div class="marquee marquee--front">
-                <div class="marquee-track" data-marquee>
-                    <span>Gaming</span><span class="mq-star">✦</span><span>Anime</span><span class="mq-star">✦</span><span>Music</span><span class="mq-star">✦</span><span>Poetry</span><span class="mq-star">✦</span><span>Creative Soul</span><span class="mq-star">✦</span><span>Night Aesthetic</span><span class="mq-star">✦</span>
-                </div>
-            </div>
+        <div class="hero-actions">
+          <a class="btn btn--dark" href="#games">see my favorites <span class="b-ico" aria-hidden="true"><i class="fa-solid fa-arrow-right"></i></span></a>
+          <a class="btn btn--ghost" href="#music"><span class="b-ico" aria-hidden="true"><i class="fa-solid fa-music"></i></span> my favorite song</a>
         </div>
 
-        <main id="main">
+        <div class="hero-find">
+          <span class="lbl">find me</span>
+          <div class="find-icons">
+            <a href="#socials" aria-label="Discord" title="Discord"><i class="fa-brands fa-discord" aria-hidden="true"></i></a>
+            <a href="https://www.youtube.com/@xSphereXx" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+            <a href="https://www.twitch.tv/xspherexxx" target="_blank" rel="noopener" aria-label="Twitch" title="Twitch"><i class="fa-brands fa-twitch" aria-hidden="true"></i></a>
+            <a href="https://www.tiktok.com/@xspherexx" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+            <a href="https://open.spotify.com/search/BlueReaper" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></a>
+          </div>
+          <a class="all" href="#socials">all links <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true" style="font-size:.5em"></i></a>
+        </div>
+      </div>
 
-            <!-- ══════ GAMING ══════ -->
-            <section class="section" id="gaming">
-                <div class="section-head" data-reveal>
-                    <span class="section-label"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Gaming</span>
-                    <h2 class="section-title">The Gaming <span class="grad">Realm</span></h2>
-                </div>
+      <div class="hero-visual" data-reveal style="--d:.12s">
+        <div class="portrait-glow" aria-hidden="true"></div>
+        <span class="sparkle sparkle--a" aria-hidden="true">&#10022;</span>
+        <span class="sparkle sparkle--b" aria-hidden="true">&#10022;</span>
+        <span class="sparkle sparkle--c" aria-hidden="true">&#10022;</span>
 
-                <div class="bento">
-                    <!-- Interactive 3D Minecraft skin -->
-                    <article class="card mc-card span-2 row-2" data-reveal>
-                        <div class="card-head">
-                            <div class="card-icon card-icon--violet"><i class="fa-solid fa-cube" aria-hidden="true"></i></div>
-                            <h3>Minecraft Skin <span class="card-sub">fully interactive &amp; in 3D</span></h3>
-                            <span class="drag-chip"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i> Drag me</span>
-                        </div>
+        <div class="player-card">
+          <span class="pc-pin" aria-hidden="true"></span>
 
-                        <div class="skin-stage" id="skinStage">
-                            <img class="skin-fallback" id="skinFallback"
-                                 src="https://mc-heads.net/body/xSphereXx/240"
-                                 data-fallback="https://vzge.me/full/384/8c2a3f0a2c6f4c7c9c3e1a6c6a0d8b91.png"
-                                 alt="xSphereXx Minecraft skin" loading="lazy">
-                            <canvas id="skinCanvas" aria-label="Interactive 3D model of the Minecraft skin of xSphereXx. Drag to rotate."></canvas>
-                            <span class="skin-status" id="skinStatus">loading 3D…</span>
-                        </div>
+          <div class="pc-head">
+            <span class="pc-online"><i aria-hidden="true"></i>online</span>
 
-                        <div class="mc-controls" role="group" aria-label="Skin animation controls">
-                            <button type="button" class="anim-btn" data-anim="idle"><i class="fa-solid fa-person-standing" aria-hidden="true"></i> Idle</button>
-                            <button type="button" class="anim-btn" data-anim="walk"><i class="fa-solid fa-person-walking" aria-hidden="true"></i> Walk</button>
-                            <button type="button" class="anim-btn" data-anim="run"><i class="fa-solid fa-person-running" aria-hidden="true"></i> Run</button>
-                            <button type="button" class="anim-btn" data-anim="wave"><i class="fa-solid fa-hand" aria-hidden="true"></i> Wave</button>
-                            <button type="button" class="anim-btn" data-anim="fly"><i class="fa-solid fa-rocket" aria-hidden="true"></i> Fly</button>
-                            <span class="spacer"></span>
-                            <button type="button" class="anim-btn anim-btn--icon active" id="spinToggle" aria-pressed="true" title="Toggle auto-spin"><i class="fa-solid fa-rotate" aria-hidden="true"></i><span class="visually-hidden">Toggle auto-spin</span></button>
-                            <button type="button" class="anim-btn anim-btn--icon" id="camReset" title="Reset camera"><i class="fa-solid fa-camera-rotate" aria-hidden="true"></i><span class="visually-hidden">Reset camera</span></button>
-                        </div>
+            <div class="pc-face" id="avatarStack">
+              <span class="av-fallback" aria-hidden="true">xS</span>
+              <img class="av" id="avatarImg"
+                   src="https://cdn.discordapp.com/avatars/735936207162310716/c395de37de1d91ee3d95c1884e6c79dc.png?size=256"
+                   data-fallback="https://minotar.net/helm/xSphereXx/256.png"
+                   alt="xSphereX &mdash; Discord avatar" width="256" height="256">
+              <img class="avatar-deco" id="avatarDeco"
+                   src="https://cdn.discordapp.com/avatar-decoration-presets/a_13913a00bd9990ab4102a3bf069f0f3f.png?size=256"
+                   alt="" aria-hidden="true">
+            </div>
 
-                        <div class="mc-foot">
-                            <span class="mc-username">xSphereXx</span>
-                            <span class="mc-platform">Java Edition</span>
-                            <button type="button" class="copy-btn" data-copy="xSphereXx" data-copy-msg="Minecraft username copied!">
-                                <i class="fa-solid fa-copy" aria-hidden="true"></i> Copy IGN
-                            </button>
-                        </div>
-                    </article>
+            <div class="pc-id">
+              <span class="k">discord &middot; ign</span>
+              <span class="v">xSphereXx</span>
+              <span class="s">discord &middot; xspherex</span>
+            </div>
+          </div>
 
-                    <!-- Favorite games -->
-                    <article class="card span-2" data-reveal style="--d:.08s">
-                        <span class="card-sparkle" aria-hidden="true">✦</span>
-                        <div class="card-head">
-                            <div class="card-icon card-icon--amber"><i class="fa-solid fa-star" aria-hidden="true"></i></div>
-                            <h3>Favorite Games</h3>
-                        </div>
-                        <ul class="game-list">
-                            <li class="game-row">
-                                <a href="https://nte.perfectworld.com/" target="_blank" rel="noopener">
-                                    <span class="game-logo-wrap"><img class="game-logo" src="https://nte.perfectworld.com/favicon.ico" data-fallback-hide alt="" width="30" height="30" loading="lazy"></span>
-                                    Neverness to Everness
-                                    <span class="game-arrow"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
-                                </a>
-                            </li>
-                            <li class="game-row">
-                                <a href="https://hsr.hoyoverse.com/" target="_blank" rel="noopener">
-                                    <span class="game-logo-wrap"><img class="game-logo" src="https://act-webstatic.hoyoverse.com/event-static-hoyowiki-admin/2024/05/06/76051013/f3c5e436702331a3e8a3f82f0a35763d_4387198294247292626.png" data-fallback="https://hsr.hoyoverse.com/favicon.ico" alt="" width="30" height="30" loading="lazy"></span>
-                                    Honkai: Star Rail
-                                    <span class="game-arrow"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
-                                </a>
-                            </li>
-                            <li class="game-row">
-                                <a href="https://www.minecraft.net/" target="_blank" rel="noopener">
-                                    <span class="game-logo-wrap"><img class="game-logo" src="https://www.minecraft.net/etc.clientlibs/minecraft/clientlibs/main/resources/favicon-96x96.png" data-fallback="https://www.minecraft.net/favicon.ico" alt="" width="30" height="30" loading="lazy"></span>
-                                    Minecraft
-                                    <span class="game-arrow"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
-                                </a>
-                            </li>
-                        </ul>
-                    </article>
+          <div class="pc-name">
+            <span class="n">Sphere.</span>
+            <span class="r">gamer &middot; music collector &middot; occasional poet</span>
+          </div>
 
-                    <!-- Playstyle -->
-                    <article class="card span-2" data-reveal style="--d:.16s">
-                        <div class="card-head">
-                            <div class="card-icon card-icon--sky"><i class="fa-solid fa-wind" aria-hidden="true"></i></div>
-                            <h3>Playstyle</h3>
-                        </div>
-                        <p class="playstyle-text">PC gamer with a chill, relaxed approach. Games are about the experience, not the grind.</p>
-                        <div class="tag-row">
-                            <span class="tag tag--violet">PC Gaming</span>
-                            <span class="tag tag--rose">Chill Vibes</span>
-                            <span class="tag tag--sky">Explorer</span>
-                        </div>
-                    </article>
-                </div>
-            </section>
+          <div class="pc-rows">
+            <div class="pc-row"><span class="k">favorite games</span><span class="v">Clash of Critters, Minecraft +2</span></div>
+            <div class="pc-row"><span class="k">on repeat</span><span class="v">Evil &middot; Camila</span></div>
+            <div class="pc-row"><span class="k">spotify</span><span class="v">BlueReaper</span></div>
+          </div>
 
-            <!-- ══════ MUSIC ══════ -->
-            <section class="section" id="music">
-                <div class="section-head" data-reveal>
-                    <span class="section-label"><i class="fa-solid fa-headphones" aria-hidden="true"></i> Music</span>
-                    <h2 class="section-title">Soundtrack of the <span class="grad">Soul</span></h2>
-                </div>
+          <a class="now-card" href="#music" aria-label="Now playing: Evil by Camila and Evil">
+            <span class="now-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+            <span class="now-body">
+              <span class="k"><i class="blip" aria-hidden="true"></i>now playing</span>
+              <span class="t">Evil</span>
+              <span class="a">Camila &amp; Evil</span>
+            </span>
+            <span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </a>
+        </div>
+      </div>
 
-                <div class="bento">
-                    <article class="card span-2" data-reveal>
-                        <div class="card-head">
-                            <div class="vinyl" aria-hidden="true"></div>
-                            <h3>A Song That Matters <span class="card-sub">on repeat, close to the heart</span></h3>
-                        </div>
-                        <div class="spotify-wrap">
-                            <iframe src="https://open.spotify.com/embed/track/6ZMO0DmZytEvD8D0dwDHhm?utm_source=generator&theme=0"
-                                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                    loading="lazy" title="Spotify player — a personally important song"></iframe>
-                        </div>
-                        <p class="music-note">This song is personally important and represents an <span class="highlight">emotional connection</span>.</p>
-                    </article>
+    </div>
+  </div>
+</header>
 
-                    <article class="card span-2" data-reveal style="--d:.1s">
-                        <span class="card-sparkle" aria-hidden="true">✦</span>
-                        <div class="card-head">
-                            <div class="card-icon card-icon--pink"><i class="fa-solid fa-microphone" aria-hidden="true"></i></div>
-                            <h3>Favorite Artists</h3>
-                        </div>
-                        <ol class="ranked-list">
-                            <li>Camila</li>
-                            <li>Nihmune</li>
-                            <li>Hakos Baelz</li>
-                            <li>Bao the Whale</li>
-                        </ol>
-                    </article>
-                </div>
-            </section>
+<!-- ══════════ TICKER ══════════ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="ticker">
+    <span>Evil on repeat</span><span class="sep">✧</span>
+    <span>xSphereXx in minecraft</span><span class="sep">✧</span>
+    <span>streaming on twitch</span><span class="sep">✧</span>
+    <span>ren · bbno$ · berq · nihmune</span><span class="sep">✧</span>
+    <span>honkai: star rail</span><span class="sep">✧</span>
+    <span>clash of critters</span><span class="sep">✧</span>
+    <span>four favourite games</span><span class="sep">✧</span>
+    <span>always in my queue</span><span class="sep">✧</span>
+  </div>
+</div>
 
-            <!-- ══════ QUOTE ══════ -->
-            <section class="section" id="words">
-                <div class="section-head" data-reveal>
-                    <span class="section-label"><i class="fa-solid fa-quote-left" aria-hidden="true"></i> Words</span>
-                    <h2 class="section-title">A Personal <span class="grad">Reflection</span></h2>
-                </div>
-                <figure class="quote-card" data-reveal>
-                    <div class="quote-stars" aria-hidden="true">✦ ✦ ✦</div>
-                    <blockquote class="quote-text">
-                        Sometimes one may feel the urge to reach for <span class="em">all the stars</span>.<br>
-                        But to draw closer, one must learn to focus on <span class="em">a single one</span>.<br>
-                        That realization may come from something as simple as <span class="em">a melody</span>.
-                    </blockquote>
-                    <figcaption class="quote-sign">— xSphereX</figcaption>
-                </figure>
-            </section>
+<main>
 
-            <!-- ══════ INTERESTS ══════ -->
-            <section class="section" id="interests">
-                <div class="section-head" data-reveal>
-                    <span class="section-label"><i class="fa-solid fa-heart" aria-hidden="true"></i> Interests</span>
-                    <h2 class="section-title">World of <span class="grad">Interests</span></h2>
-                </div>
-
-                <div class="bento">
-                    <article class="card span-2 tilt" data-reveal>
-                        <div class="card-head">
-                            <div class="card-icon card-icon--violet"><i class="fa-solid fa-tv" aria-hidden="true"></i></div>
-                            <h3>Anime</h3>
-                        </div>
-                        <ol class="ranked-list">
-                            <li>Toradora!</li>
-                            <li>Sword Art Online</li>
-                            <li>Akame ga Kill</li>
-                            <li>Seraph of the End</li>
-                            <li>Wistoria: Wand and Sword</li>
-                        </ol>
-                    </article>
-
-                    <article class="card span-2 tilt" data-reveal style="--d:.08s">
-                        <span class="card-sparkle" aria-hidden="true">✦</span>
-                        <div class="card-head">
-                            <div class="card-icon card-icon--rose"><i class="fa-solid fa-user-astronaut" aria-hidden="true"></i></div>
-                            <h3>Favorite Characters</h3>
-                        </div>
-                        <div class="pill-cloud">
-                            <span class="char-pill"><i class="fa-solid fa-heart" aria-hidden="true"></i> Terakomari Gandesblood</span>
-                            <span class="char-pill"><i class="fa-solid fa-heart" aria-hidden="true"></i> Sinon (Shino Asada)</span>
-                            <span class="char-pill"><i class="fa-solid fa-heart" aria-hidden="true"></i> Krul Tepes</span>
-                            <span class="char-pill"><i class="fa-solid fa-heart" aria-hidden="true"></i> Taiga Aisaka</span>
-                            <span class="char-pill"><i class="fa-solid fa-heart" aria-hidden="true"></i> Colette Loire</span>
-                            <span class="char-pill"><i class="fa-solid fa-heart" aria-hidden="true"></i> Elfaria</span>
-                        </div>
-                    </article>
-
-                    <article class="card span-2 tilt" data-reveal>
-                        <div class="card-head">
-                            <div class="card-icon card-icon--amber"><i class="fa-solid fa-palette" aria-hidden="true"></i></div>
-                            <h3>Creative &amp; Aesthetic</h3>
-                        </div>
-                        <ul class="tick-list tick-list--violet">
-                            <li>Anime &amp; Manga aesthetics</li>
-                            <li>Gaming culture</li>
-                            <li>Music as expression</li>
-                            <li>Poetry &amp; medieval language</li>
-                        </ul>
-                    </article>
-
-                    <article class="card span-2 tilt" data-reveal style="--d:.08s">
-                        <div class="card-head">
-                            <div class="card-icon card-icon--sky"><i class="fa-solid fa-moon" aria-hidden="true"></i></div>
-                            <h3>Aesthetic &amp; Vibes</h3>
-                        </div>
-                        <ul class="tick-list tick-list--sky">
-                            <li>Night atmosphere</li>
-                            <li>Vampire-inspired aesthetics</li>
-                            <li>Medieval-inspired language style</li>
-                            <li>Dark &amp; elegant themes</li>
-                        </ul>
-                    </article>
-                </div>
-            </section>
-
-            <!-- ══════ SOCIAL LINKS ══════ -->
-            <section class="section" id="links">
-                <div class="section-head" data-reveal>
-                    <span class="section-label"><i class="fa-solid fa-link" aria-hidden="true"></i> Connect</span>
-                    <h2 class="section-title">Find <span class="grad">Me</span></h2>
-                </div>
-
-                <div class="social-grid">
-                    <div class="social-tile social-tile--discord" data-reveal>
-                        <div class="social-icon social-icon--discord"><i class="fa-brands fa-discord" aria-hidden="true"></i></div>
-                        <div class="social-info">
-                            <h4>Discord</h4>
-                            <span>xbluereaperx</span>
-                            <button type="button" class="tile-copy" data-copy="xbluereaperx" data-copy-msg="Discord username copied — see you there!">
-                                <i class="fa-solid fa-copy" aria-hidden="true"></i> Copy username
-                            </button>
-                        </div>
-                        <a class="tile-arrow" href="https://discord.com/users/735936207162310716" target="_blank" rel="noopener" aria-label="Open my Discord profile">
-                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-                        </a>
-                    </div>
-
-                    <a href="https://www.tiktok.com/@xspherexx" target="_blank" rel="noopener" class="social-tile social-tile--tiktok" data-reveal style="--d:.08s">
-                        <div class="social-icon social-icon--tiktok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></div>
-                        <div class="social-info">
-                            <h4>TikTok</h4>
-                            <span>@xspherexx</span>
-                        </div>
-                        <span class="tile-arrow"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
-                    </a>
-
-                    <a href="https://open.spotify.com/user/xspherexx" target="_blank" rel="noopener" class="social-tile social-tile--spotify" data-reveal style="--d:.16s">
-                        <div class="social-icon social-icon--spotify"><i class="fa-brands fa-spotify" aria-hidden="true"></i></div>
-                        <div class="social-info">
-                            <h4>Spotify</h4>
-                            <span>My Profile</span>
-                        </div>
-                        <span class="tile-arrow"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
-                    </a>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <span class="foot-logo"><span class="x">x</span>Sphere<span class="x">X</span></span>
-            <p>crafted with <span class="spark">✦</span> by xSphereX — <span id="year">2026</span></p>
-        </footer>
+<!-- ══════════ 01 · GAMES ══════════ -->
+<section class="sec" id="games">
+  <div class="wrap">
+    <div class="sec-top">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span>favorites / 01 · games</span>
+        <h2 class="h2 sec-title">My Top 4 Games,<br>the Ones I <em>Love Most</em>.</h2>
+        <p class="sec-lead">My top 4 games, the ones I love most.</p>
+      </div>
+      <div class="stat-pill" data-reveal style="--d:.1s">
+        <span class="ico" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+        <span class="txt"><b>4 games</b><small>pc &amp; mobile</small></span>
+      </div>
     </div>
 
-    <!-- Toast + back to top -->
-    <div class="toast" id="toast" role="status" aria-live="polite"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span id="toastMsg">Copied!</span></div>
-    <button type="button" class="to-top" id="toTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
+    <div class="filters" data-reveal>
+      <button class="fbtn on" data-filter="all">all <span class="n">4</span></button>
+      <button class="fbtn" data-filter="multiplayer">multiplayer <span class="n">2</span></button>
+      <button class="fbtn" data-filter="mobile">mobile <span class="n">4</span></button>
+      <button class="fbtn" data-filter="pc">pc <span class="n">3</span></button>
+      <button class="fbtn" data-filter="story">story <span class="n">1</span></button>
+      <span class="hint"><i class="fa-solid fa-star" aria-hidden="true"></i> click a filter to narrow it down</span>
+    </div>
 
-    <!-- skinview3d (interactive Minecraft skin viewer) -->
-    <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.4.2/bundles/skinview3d.bundle.js"></script>
+    <div class="games-grid" id="gamesGrid">
 
-    <script>
-    (function () {
-        'use strict';
-        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      <article class="game game--coc" role="button" tabindex="0" aria-haspopup="dialog" data-year="2026" data-released="May 20, 2026" data-maker="Farlight Games" data-platforms="iOS · Android" data-link="https://cc.farlightgames.com/" data-about="Collect Critters, throw pinballs to level up and stop the zombies." data-tags="mobile" data-reveal>
+        <div class="game-cover">
+          <span class="game-no">no. 01</span>
+          <div class="cover-art" aria-hidden="true">
+            <img class="cover-img" src="https://cdn-www.bluestacks.com/bs-images/clash-of-critters-de.jpg" alt="" decoding="async" fetchpriority="high" style="object-position:50% 6%">
+            <span data-art="game--coc::coc-critter"></span>
+          </div>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Clash of Critters</h3>
+          <p class="game-genre">pinball · tower defense</p>
+          <p class="game-desc">Collect Critters, throw pinballs to level up and stop the zombies.</p>
+          <div class="game-tags"><span>mobile</span><span>strategy</span></div>
+        </div>
+      </article>
 
-        /* ─────────────────────────────
-           Image fallbacks (data-fallback / data-fallback-hide)
-           ───────────────────────────── */
-        document.querySelectorAll('img[data-fallback], img[data-fallback-hide]').forEach(function (img) {
-            img.addEventListener('error', function handler() {
-                if (img.dataset.fallback) {
-                    var next = img.dataset.fallback;
-                    delete img.dataset.fallback;
-                    img.src = next;
-                } else {
-                    img.style.display = 'none';
-                    img.removeEventListener('error', handler);
-                }
-            });
-        });
+      <article class="game game--mc" role="button" tabindex="0" aria-haspopup="dialog" data-year="2011" data-released="November 18, 2011" data-maker="Mojang Studios" data-platforms="PC · Mobile · Console" data-link="https://www.minecraft.net/" data-about="Infinite blocks, infinite worlds. Mining, building, surviving the night — and then starting a new world the moment a build gets too ambitious. There is no ending, which is exactly why it never gets old." data-tags="pc,mobile,multiplayer" data-reveal style="--d:.06s">
+        <div class="game-cover">
+          <span class="game-no">no. 02</span>
+          <div class="cover-art" aria-hidden="true">
+            <img class="cover-img" src="https://i.redd.it/ib4j1jt98wt71.jpg" alt="" decoding="async" fetchpriority="high" style="object-position:50% 50%">
+            <span data-art="game--mc::mc-block"></span>
+          </div>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Minecraft</h3>
+          <p class="game-genre">sandbox · survival</p>
+          <p class="game-desc">Infinite blocks, infinite worlds. Where xSphereXx lives.</p>
+          <div class="game-tags"><span>pc</span><span>mobile</span><span>multiplayer</span></div>
+        </div>
+      </article>
 
-        /* ─────────────────────────────
-           Local time (Germany) clock
-           ───────────────────────────── */
-        var clockEl = document.getElementById('localTime');
-        function updateClock() {
-            try {
-                clockEl.textContent = new Date().toLocaleTimeString('de-DE', {
-                    timeZone: 'Europe/Berlin', hour: '2-digit', minute: '2-digit'
-                });
-            } catch (e) { clockEl.textContent = ''; }
-        }
-        updateClock();
-        setInterval(updateClock, 15000);
+      <article class="game game--roblox" role="button" tabindex="0" aria-haspopup="dialog" data-year="2006" data-released="September 1, 2006" data-maker="Roblox Corporation" data-platforms="PC · Mobile · Console" data-link="https://www.roblox.com/" data-about="A platform rather than a single game: a million experiences in one place. Obbies, tycoons, horror maps, hangouts, simulators. Half the appeal is never quite knowing what you will land in." data-tags="pc,mobile,multiplayer" data-reveal style="--d:.12s">
+        <div class="game-cover">
+          <span class="game-no">no. 03</span>
+          <div class="cover-art" aria-hidden="true">
+            <img class="cover-img" src="https://images.rbxcdn.com/5348266ea6c5e67b19d6a814cbbb70f6.jpg" alt="" decoding="async" fetchpriority="high" style="object-position:50% 50%"><span data-art="game--roblox::roblox-stud"></span></div>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Roblox</h3>
+          <p class="game-genre">platform · multiplayer</p>
+          <p class="game-desc">A million games in one place. Obbies, tycoons, horror, hangouts, everything.</p>
+          <div class="game-tags"><span>pc</span><span>mobile</span><span>multiplayer</span></div>
+        </div>
+      </article>
 
-        document.getElementById('year').textContent = new Date().getFullYear();
+      <article class="game game--hsr" role="button" tabindex="0" aria-haspopup="dialog" data-year="2023" data-released="April 26, 2023" data-maker="HoYoverse" data-platforms="PC · Mobile · PS5" data-link="https://hsr.hoyoverse.com/" data-about="All aboard the Astral Express. Turn-based fights across the stars, a cast that keeps growing, and a story that goes places. The one I reach for when I want to sink a few hours into something." data-tags="pc,mobile,story" data-reveal style="--d:.18s">
+        <div class="game-cover">
+          <span class="game-no">no. 04</span>
+          <div class="cover-art" aria-hidden="true">
+            <img class="cover-img" src="assets/starrail-v6.webp" width="1400" height="788" alt="" decoding="async" fetchpriority="high" style="object-position:52% 50%"><span data-art="game--hsr::hsr-star"></span></div>
+        </div>
+        <div class="game-body">
+          <h3 class="game-title">Honkai: Star Rail</h3>
+          <p class="game-genre">turn-based · space rpg</p>
+          <p class="game-desc">All aboard the Astral Express. Turn-based fights across the stars.</p>
+          <div class="game-tags"><span>pc</span><span>mobile</span><span>story</span></div>
+        </div>
+      </article>
 
-        /* ─────────────────────────────
-           Mobile navigation
-           ───────────────────────────── */
-        var navToggle = document.getElementById('navToggle');
-        var navLinks = document.getElementById('navLinks');
-        var navIcon = navToggle.querySelector('i');
+    </div>
+  </div>
+</section>
 
-        function setNav(open) {
-            navLinks.classList.toggle('open', open);
-            navToggle.setAttribute('aria-expanded', String(open));
-            navIcon.classList.toggle('fa-bars', !open);
-            navIcon.classList.toggle('fa-xmark', open);
-        }
+<!-- ══════════ 02 · MUSIC ══════════ -->
+<section class="sec" id="music">
+  <div class="wrap">
+    <div class="sec-top">
+      <div class="sec-head" data-reveal>
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span>favorites / 02 · music</span>
+        <h2 class="h2 sec-title">My Favorite<br>Song <em>Right Now</em>.</h2>
+        <p class="sec-lead">One song I can&rsquo;t stop playing, and the artists who are always somewhere in my queue.</p>
+      </div>
+      <div class="stat-pill" data-reveal style="--d:.1s">
+        <span class="ico" aria-hidden="true"><i class="fa-solid fa-headphones"></i></span>
+        <span class="txt"><b>BlueReaper</b><small>on spotify as</small></span>
+      </div>
+    </div>
 
-        navToggle.addEventListener('click', function () {
-            setNav(!navLinks.classList.contains('open'));
-        });
+    <div class="song-card" data-reveal>
+      <div class="song-left">
+        <span class="chip"><i class="fa-solid fa-music" aria-hidden="true"></i> on repeat</span>
 
-        navLinks.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () { setNav(false); });
-        });
+        <div class="sleeve-wrap">
+          <span class="sr">Honourable mentions</span>
 
-        document.addEventListener('click', function (e) {
-            if (navLinks.classList.contains('open') && !e.target.closest('.nav-bar')) setNav(false);
-        });
+          <div class="hm hm--tl">
+            <span class="t">CCGG MADNESS</span>
+            <span class="a">Cecilia Immergreen &amp; Gigi Murin</span>
+          </div>
+          <div class="hm hm--tr">
+            <span class="t">BIRDBRAIN</span>
+            <span class="a">Bao the Whale &middot; cover</span>
+          </div>
 
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && navLinks.classList.contains('open')) setNav(false);
-        });
+          <div class="sleeve" aria-hidden="true">
+            <span class="sleeve-halo"></span>
+            <span class="sleeve-heart">♥</span>
+            <span class="sleeve-spark s1">✦</span>
+            <span class="sleeve-spark s2">✦</span>
+            <span class="sleeve-txt">
+              <span class="t">Evil</span>
+              <span class="a">camila &amp; evil</span>
+            </span>
+          </div>
 
-        /* ─────────────────────────────
-           Marquee: duplicate tracks for a seamless loop
-           ───────────────────────────── */
-        document.querySelectorAll('[data-marquee]').forEach(function (track) {
-            track.innerHTML += track.innerHTML;
-            track.innerHTML += track.innerHTML;
-        });
+          <div class="hm hm--bl">
+            <span class="t">ROCK IN!</span>
+            <span class="a">Koseki Bijou</span>
+          </div>
+          <div class="hm hm--br">
+            <span class="t">La Roja</span>
+            <span class="a">Hakos Baelz</span>
+          </div>
+        </div>
 
-        /* ─────────────────────────────
-           Typewriter
-           ───────────────────────────── */
-        var twEl = document.getElementById('typewriter');
-        var phrases = [
-            'playing Honkai: Star Rail ✦',
-            'watching Toradora! (again)',
-            'lost in a melody…',
-            'building something in Minecraft',
-            'writing poetry at 2 AM',
-            'reaching for a single star'
-        ];
+        <div class="meta">
+          <span><i class="fa-solid fa-star" aria-hidden="true"></i>cover of Melanie Martinez</span>
+          <span>Oct 31, 2024</span>
+        </div>
 
-        if (prefersReducedMotion) {
-            twEl.textContent = phrases[0];
-        } else {
-            var phraseIndex = 0, charIndex = 0, deleting = false;
-            (function typeStep() {
-                var current = phrases[phraseIndex];
-                twEl.textContent = current.slice(0, charIndex);
-                var delay;
-                if (!deleting) {
-                    if (charIndex < current.length) { charIndex++; delay = 55 + Math.random() * 45; }
-                    else { deleting = true; delay = 1800; }
-                } else {
-                    if (charIndex > 0) { charIndex--; delay = 26; }
-                    else { deleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; delay = 380; }
-                }
-                setTimeout(typeStep, delay);
-            })();
-        }
+      </div>
 
-        /* ─────────────────────────────
-           Scroll reveal
-           ───────────────────────────── */
-        var revealEls = document.querySelectorAll('[data-reveal]');
-        if ('IntersectionObserver' in window && !prefersReducedMotion) {
-            var revealObserver = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                        revealObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-            revealEls.forEach(function (el) { revealObserver.observe(el); });
-            /* Safety net: never leave content hidden */
-            setTimeout(function () {
-                revealEls.forEach(function (el) { el.classList.add('revealed'); });
-            }, 3500);
-        } else {
-            revealEls.forEach(function (el) { el.classList.add('revealed'); });
-        }
+      <div class="song-right">
+        <span class="song-flag"><span class="dot" aria-hidden="true"></span>favorite song</span>
 
-        /* ─────────────────────────────
-           Copy to clipboard + toast
-           ───────────────────────────── */
-        var toast = document.getElementById('toast');
-        var toastMsg = document.getElementById('toastMsg');
-        var toastTimer = null;
+        <div class="song-title-row">
+          <div>
+            <h3 class="song-title">Evil</h3>
+            <p class="song-by">camila &amp; evil · cover</p>
+          </div>
+          <a class="pill-link" href="https://open.spotify.com/track/6ZMO0DmZytEvD8D0dwDHhm" target="_blank" rel="noopener">
+            <i class="fa-brands fa-spotify" aria-hidden="true"></i> spotify
+          </a>
+        </div>
 
-        function showToast(message) {
-            toastMsg.textContent = message;
-            toast.classList.add('show');
-            clearTimeout(toastTimer);
-            toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2600);
-        }
+        <div class="video">
+          <iframe src="https://www.youtube.com/embed/MWGnHCaqxdU"
+                  title="Evil — cover by Camila and Evil"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allowfullscreen></iframe>
+        </div>
 
-        function fallbackCopy(text) {
-            var ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            try { document.execCommand('copy'); } catch (e) { /* ignore */ }
-            document.body.removeChild(ta);
-        }
+        <p class="video-cap">play here<b>【 EVIL 】Cover by Camila and Evil</b></p>
+        <a class="yt-link" href="https://www.youtube.com/watch?v=MWGnHCaqxdU" target="_blank" rel="noopener">
+          open on youtube <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+        </a>
 
-        document.querySelectorAll('[data-copy]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var text = btn.dataset.copy;
-                var msg = btn.dataset.copyMsg || 'Copied!';
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(text)
-                        .then(function () { showToast(msg); })
-                        .catch(function () { fallbackCopy(text); showToast(msg); });
-                } else {
-                    fallbackCopy(text);
-                    showToast(msg);
-                }
-            });
-        });
+      </div>
+    </div>
 
-        /* ─────────────────────────────
-           Back to top
-           ───────────────────────────── */
-        var toTop = document.getElementById('toTop');
-        window.addEventListener('scroll', function () {
-            toTop.classList.toggle('show', window.scrollY > 650);
-        }, { passive: true });
-        toTop.addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-        });
+    <!-- artists -->
+    <div class="artists-head" data-reveal>
+      <div>
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span>favorite artists</span>
+        <h3 class="h3" style="margin-top:12px">Always in My <em>Queue</em>.</h3>
+      </div>
+      <span class="count">12 artists · tap one to listen on spotify</span>
+    </div>
 
-        /* ─────────────────────────────
-           Hero parallax floaties
-           ───────────────────────────── */
-        var floaties = document.querySelectorAll('.floatie');
-        if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches && floaties.length) {
-            var hero = document.querySelector('.hero');
-            var targetX = 0, targetY = 0, currentX = 0, currentY = 0, rafId = null;
+    <div class="artists-grid">
 
-            function parallaxLoop() {
-                currentX += (targetX - currentX) * 0.06;
-                currentY += (targetY - currentY) * 0.06;
-                floaties.forEach(function (el) {
-                    var depth = parseFloat(el.dataset.parallax || 10);
-                    el.style.setProperty('--px', (currentX * depth) + 'px');
-                    el.style.setProperty('--py', (currentY * depth) + 'px');
-                });
-                if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
-                    rafId = requestAnimationFrame(parallaxLoop);
-                } else { rafId = null; }
-            }
+      <a class="artist" href="https://open.spotify.com/artist/0Repe2EiNjaFAFIukrroUM" target="_blank" rel="noopener" data-reveal>
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">R</span>
+          <img src="https://cdn-images.dzcdn.net/images/artist/1f813bc28ece1c5a50b1971277a777ca/500x500-000000-80-0-0.jpg" alt="Ren" loading="lazy" width="300" height="300">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Ren</h4>
+          <p class="artist-genre">alt hip-hop</p>
+          <p class="artist-desc">Welsh rapper and multi-instrumentalist. Raw storytelling and wild genre switches.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>Murderer · Money Game, Pt. 1–3 · Starry Night, Acts I–IV · Hi Ren · The Music Business</b></p>
+        </div>
+      </a>
 
-            hero.addEventListener('pointermove', function (e) {
-                var rect = hero.getBoundingClientRect();
-                targetX = ((e.clientX - rect.left) / rect.width - 0.5);
-                targetY = ((e.clientY - rect.top) / rect.height - 0.5);
-                if (!rafId) rafId = requestAnimationFrame(parallaxLoop);
-            });
+      <a class="artist" href="https://open.spotify.com/artist/2ZFQmjVLQzQCiklALLyMe3" target="_blank" rel="noopener" data-reveal style="--d:.04s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">C</span>
+          <img src="https://cdn-images.dzcdn.net/images/artist/cb5bb42909d0802d9dbf885d21065232/500x500-000000-80-0-0.jpg" alt="Camila" loading="lazy" width="300" height="300">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Camila</h4>
+          <p class="artist-genre">vtuber · pop</p>
+          <p class="artist-desc">The voice behind my favorite song. Covers and originals packed with personality.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>evil (feat. evil) · pity party</b></p>
+        </div>
+      </a>
 
-            hero.addEventListener('pointerleave', function () {
-                targetX = 0; targetY = 0;
-                if (!rafId) rafId = requestAnimationFrame(parallaxLoop);
-            });
-        }
+      <a class="artist" href="https://open.spotify.com/artist/41X1TR6hrK8Q2ZCpp2EqCz" target="_blank" rel="noopener" data-reveal style="--d:.08s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">B</span>
+          <img src="https://cdn-images.dzcdn.net/images/artist/c37aef262a5f3a7900826caee9fac4a7/500x500-000000-80-0-0.jpg" alt="bbno$" loading="lazy" width="300" height="300">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">bbno$</h4>
+          <p class="artist-genre">rap · pop</p>
+          <p class="artist-desc">Playful, ridiculous, impossible not to bob your head to.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>meant to be · why am i like this · diamonds are forever</b></p>
+        </div>
+      </a>
 
-        /* ─────────────────────────────
-           Subtle card tilt
-           ───────────────────────────── */
-        if (!prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
-            document.querySelectorAll('.tilt').forEach(function (card) {
-                card.addEventListener('pointerenter', function () {
-                    /* snappier transition than the scroll-reveal one while tilting */
-                    card.style.transition = 'transform 0.15s ease-out, box-shadow 0.35s ease';
-                });
-                card.addEventListener('pointermove', function (e) {
-                    var rect = card.getBoundingClientRect();
-                    var px = (e.clientX - rect.left) / rect.width - 0.5;
-                    var py = (e.clientY - rect.top) / rect.height - 0.5;
-                    card.style.transform = 'perspective(900px) rotateX(' + (-py * 5) + 'deg) rotateY(' + (px * 5) + 'deg) translateY(-3px)';
-                });
-                card.addEventListener('pointerleave', function () {
-                    card.style.transform = '';
-                    setTimeout(function () { card.style.transition = ''; }, 220);
-                });
-            });
-        }
+      <a class="artist" href="https://open.spotify.com/artist/0mhXOWxkDI2KtV3x0Vd19s" target="_blank" rel="noopener" data-reveal style="--d:.12s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">N</span>
+          <img src="https://i.scdn.co/image/ab6761610000e5ebfd7f1258d77bd744eee59313" alt="Nihmune" loading="lazy">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Nihmune</h4>
+          <p class="artist-genre">vtuber · pop</p>
+          <p class="artist-desc">Catchy, chaotic, unmistakably internet-born pop.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>Scatterbrain</b></p>
+        </div>
+      </a>
 
-        /* ─────────────────────────────
-           Pastel particle background
-           ───────────────────────────── */
-        (function initParticles() {
-            if (prefersReducedMotion) return;
-            var canvas = document.getElementById('bg-canvas');
-            var ctx = canvas.getContext('2d');
-            var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-            var w = 0, h = 0, particles = [], running = true, frame = null;
-            var COLORS = ['167,139,250', '249,168,212', '125,211,252', '252,211,77', '110,231,183', '253,186,168'];
+      <a class="artist" href="https://open.spotify.com/artist/3WUqGdcFJJquJgCPkEzCfs" target="_blank" rel="noopener" data-reveal>
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">O</span>
+          <img src="https://i.scdn.co/image/ab676161000051749d569994aa609fc485448e22" alt="overtonight" loading="lazy">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">overtonight</h4>
+          <p class="artist-genre">indie</p>
+          <p class="artist-desc">Boston indie artist. Sincere lyrics and a DIY late-night sound.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>ghost party · trick or treat</b></p>
+        </div>
+      </a>
 
-            function resize() {
-                w = window.innerWidth;
-                h = window.innerHeight;
-                canvas.width = Math.round(w * dpr);
-                canvas.height = Math.round(h * dpr);
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-            }
+      <a class="artist" href="https://open.spotify.com/artist/3kNWENaTd7pb0xFqNuq7Sc" target="_blank" rel="noopener" data-reveal style="--d:.04s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">A</span>
+          <img src="https://cdn-images.dzcdn.net/images/artist/e343541710befd7ed4f6cc2cb98706ad/500x500-000000-80-0-0.jpg" alt="Alohaii" loading="lazy" width="300" height="300">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Alohaii</h4>
+          <p class="artist-genre">electronic · vtuber pop</p>
+          <p class="artist-desc">Bright electronic pop with summer energy and story-driven albums.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>Rose · Magazines · Seasons · Heart Of Glass · One Step At A Time</b></p>
+        </div>
+      </a>
 
-            function spawn(randomY) {
-                return {
-                    x: Math.random() * w,
-                    y: randomY ? Math.random() * h : h + 12,
-                    r: 1.4 + Math.random() * 3.4,
-                    speed: 0.12 + Math.random() * 0.35,
-                    sway: Math.random() * Math.PI * 2,
-                    swaySpeed: 0.002 + Math.random() * 0.006,
-                    alpha: 0.25 + Math.random() * 0.4,
-                    color: COLORS[Math.floor(Math.random() * COLORS.length)]
-                };
-            }
+      <a class="artist" href="https://open.spotify.com/artist/3HedFe4b2Nqeg1CEzmt6ZI" target="_blank" rel="noopener" data-reveal style="--d:.08s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">M</span>
+          <img src="https://cdn-images.dzcdn.net/images/artist/b649170d212b8e4293735cf1e651ebb3/500x500-000000-80-0-0.jpg" alt="Marino" loading="lazy" width="300" height="300">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Marino</h4>
+          <p class="artist-genre">alt pop</p>
+          <p class="artist-desc">Emotional, honest songs with modern production.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>Im Sorry Mom · Rip Out Your Eyes · Im Doing Fine</b></p>
+        </div>
+      </a>
 
-            function init() {
-                resize();
-                var count = Math.min(64, Math.max(24, Math.round(w / 22)));
-                particles = [];
-                for (var i = 0; i < count; i++) particles.push(spawn(true));
-            }
+      <a class="artist" href="https://open.spotify.com/artist/0eVixEZVW2PB1UogwTWXc1" target="_blank" rel="noopener" data-reveal style="--d:.12s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">B</span>
+          <img src="https://cdn-images.dzcdn.net/images/artist/70d8cd860e2bb521480f36a6f678e708/500x500-000000-80-0-0.jpg" alt="Berq" loading="lazy" width="300" height="300">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Berq</h4>
+          <p class="artist-genre">german pop</p>
+          <p class="artist-desc">Hamburg singer-songwriter with deep, vulnerable lyrics.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>Träumen · Mein Hass tritt dir die Haustür ein</b></p>
+        </div>
+      </a>
 
-            function tick() {
-                ctx.clearRect(0, 0, w, h);
-                for (var i = 0; i < particles.length; i++) {
-                    var p = particles[i];
-                    p.y -= p.speed;
-                    p.sway += p.swaySpeed;
-                    p.x += Math.sin(p.sway) * 0.25;
-                    if (p.y < -12) particles[i] = spawn(false);
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(' + p.color + ',' + p.alpha + ')';
-                    ctx.fill();
-                }
-                if (running) frame = requestAnimationFrame(tick);
-            }
+      <a class="artist" href="https://open.spotify.com/artist/3h5FLKIAPF9O96Sdz2j4Jb" target="_blank" rel="noopener" data-reveal>
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">HB</span>
+          <img src="https://cdn-images.dzcdn.net/images/artist/99855d8a19841eba46f40a7371d15c70/500x500-000000-80-0-0.jpg" alt="Hakos Baelz" loading="lazy" width="300" height="300">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Hakos Baelz</h4>
+          <p class="artist-genre">vtuber · pop</p>
+          <p class="artist-desc">Chaos incarnate. Endlessly fun, chaotic energy in every release.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>La Roja · MESS · Play Dice!</b></p>
+        </div>
+      </a>
 
-            document.addEventListener('visibilitychange', function () {
-                running = !document.hidden;
-                if (running) { cancelAnimationFrame(frame); frame = requestAnimationFrame(tick); }
-                else cancelAnimationFrame(frame);
-            });
+      <a class="artist" href="https://open.spotify.com/artist/1xMnU9x62MT8ojHTxaR2dl" target="_blank" rel="noopener" data-reveal style="--d:.04s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">F</span>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlgmaivq6_Fno7JRyPimf0fxIxIeS5Di-umdJYt6limI2b2u47hiZzYCRH&amp;s=10" alt="FUWAMOCO" loading="lazy">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">FUWAMOCO</h4>
+          <p class="artist-genre">vtuber · j-pop</p>
+          <p class="artist-desc">Twin guard dogs with the most joyful vocals around.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>Prisoner · Sirens · Rebellion</b></p>
+        </div>
+      </a>
 
-            var resizeTimer;
-            window.addEventListener('resize', function () {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(init, 180);
-            });
+      <a class="artist" href="https://open.spotify.com/artist/2kCcBybjl3SAtIcwdWpUe3" target="_blank" rel="noopener" data-reveal style="--d:.08s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">LP</span>
+          <img src="https://cdn-images.dzcdn.net/images/artist/9c3749d65aa59626a0a876ca9381e10e/500x500-000000-80-0-0.jpg" alt="Lil Peep" loading="lazy" width="300" height="300">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Lil Peep</h4>
+          <p class="artist-genre">emo rap</p>
+          <p class="artist-desc">A pioneer of emo rap. Haunting, heartfelt, forever iconic.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>your favorite dress · Save That Shit · Falling Down</b></p>
+        </div>
+      </a>
 
-            init();
-            frame = requestAnimationFrame(tick);
-        })();
+      <a class="artist" href="https://open.spotify.com/artist/7qFU02MvlE8O38L6ykvG3e" target="_blank" rel="noopener" data-reveal style="--d:.12s">
+        <div class="artist-photo" data-img-host>
+          <span class="artist-mono" aria-hidden="true">N</span>
+          <img src="https://i.scdn.co/image/ab6761610000e5eb97ae5ab143a169c235427534" alt="Neuro-sama" loading="lazy">
+        </div>
+        <div class="artist-body">
+          <h4 class="artist-name">Neuro-sama</h4>
+          <p class="artist-genre">ai vtuber</p>
+          <p class="artist-desc">The AI vtuber who sings, games, and somehow keeps getting better.</p>
+          <p class="artist-try"><i class="fa-solid fa-music" aria-hidden="true"></i>try: <b>NEVER · Why Do I · Colorful Array</b></p>
+        </div>
+      </a>
 
-        /* ─────────────────────────────
-           Interactive 3D Minecraft skin (skinview3d)
-           ───────────────────────────── */
-        (function initSkinViewer() {
-            var stage = document.getElementById('skinStage');
-            var canvas = document.getElementById('skinCanvas');
-            var fallbackImg = document.getElementById('skinFallback');
-            var statusEl = document.getElementById('skinStatus');
-            var animButtons = document.querySelectorAll('[data-anim]');
-            var spinToggle = document.getElementById('spinToggle');
-            var camReset = document.getElementById('camReset');
+    </div>
+  </div>
+</section>
 
-            var UUID = '8c2a3f0a2c6f4c7c9c3e1a6c6a0d8b91';
-            var USERNAME = 'xSphereXx';
-            var SKIN_SOURCES = [
-                'https://vzge.me/skin/512/' + UUID + '.png',
-                'https://minotar.net/skin/' + USERNAME,
-                'https://mc-heads.net/skin/' + USERNAME
-            ];
+<!-- ══════════ 03 · MINECRAFT SKIN ══════════ -->
+<section class="sec" id="skin">
+  <div class="wrap">
+    <div class="dark-panel" data-reveal>
+      <div class="skin-grid">
 
-            function useStaticFallback(message) {
-                canvas.style.display = 'none';
-                statusEl.textContent = message || 'static preview';
-                animButtons.forEach(function (b) { b.disabled = true; b.style.opacity = '0.45'; });
-                spinToggle.disabled = true; spinToggle.style.opacity = '0.45';
-                camReset.disabled = true; camReset.style.opacity = '0.45';
-            }
+        <div>
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span>03 · minecraft skin</span>
+          <span class="wip"><i aria-hidden="true"></i>work in progress</span>
 
-            if (!window.skinview3d) { useStaticFallback(); return; }
+          <h2 class="skin-title">Still a Work<br><em>in Progress.</em></h2>
 
-            var viewer;
-            try {
-                viewer = new window.skinview3d.SkinViewer({
-                    canvas: canvas,
-                    width: stage.clientWidth || 480,
-                    height: stage.clientHeight || 420,
-                    pixelRatio: Math.min(window.devicePixelRatio || 1, 2)
-                });
-            } catch (e) {
-                useStaticFallback();
-                return;
-            }
+          <p class="dark-lead">
+            This skin is just a placeholder and I&rsquo;ll change it someday.
+            Once I have something I can call my own, something I can use to finish my plans.
+          </p>
 
-            viewer.zoom = 0.82;
-            viewer.fov = 46;
-            viewer.autoRotate = !prefersReducedMotion;
-            viewer.autoRotateSpeed = 0.75;
-            viewer.controls.enableZoom = false;   /* keep page scrolling smooth */
-            viewer.controls.enablePan = false;
-            canvas.style.touchAction = 'pan-y';  /* allow vertical page scroll on touch */
+          <div class="skin-stats">
+            <div class="skin-stat"><span class="k">username</span><span class="v">xSphereXx</span></div>
+            <div class="skin-stat"><span class="k">model</span><span class="v">slim arms</span></div>
+            <div class="skin-stat"><span class="k">status</span><span class="v">in progress</span></div>
+            <div class="skin-stat"><span class="k">next up</span><span class="v">Making concept, model it, and one day pressing record</span></div>
+          </div>
 
-            if (prefersReducedMotion) {
-                spinToggle.classList.remove('active');
-                spinToggle.setAttribute('aria-pressed', 'false');
-            }
+          <div class="skin-actions">
+            <button type="button" class="btn btn--mint" data-copy="xSphereXx" data-copy-msg="Minecraft username copied!">
+              copy xSphereXx <span class="b-ico" aria-hidden="true"><i class="fa-solid fa-copy"></i></span>
+            </button>
+            <a class="btn btn--outline" href="https://namemc.com/profile/xSphereXx" target="_blank" rel="noopener">
+              view on namemc <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
 
-            var ANIMATIONS = {
-                idle: function () { return new window.skinview3d.IdleAnimation(); },
-                walk: function () { var a = new window.skinview3d.WalkingAnimation(); a.speed = 0.85; return a; },
-                run:  function () { var a = new window.skinview3d.RunningAnimation(); a.speed = 0.95; return a; },
-                wave: function () { return new window.skinview3d.WaveAnimation(); },
-                fly:  function () { var a = new window.skinview3d.FlyingAnimation(); a.speed = 0.9; return a; }
-            };
+        <div>
+          <div class="viewer">
+            <div class="viewer-bar">
+              <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="lbl">skin viewer · 3d</span>
+            </div>
 
-            var waveTimeout = null;
-            function setAnimation(name) {
-                if (!ANIMATIONS[name]) return;
-                viewer.animation = ANIMATIONS[name]();
-                animButtons.forEach(function (b) {
-                    b.classList.toggle('active', b.dataset.anim === name);
-                });
-            }
+            <div class="viewer-stage" id="skinStage">
+              <img class="skin-fallback"
+                   id="skinFallback"
+                   src="https://minotar.net/armor/body/xSphereXx/240.png"
+                   data-fallback="https://mc-heads.net/body/xSphereXx/240"
+                   alt="xSphereXx Minecraft skin" loading="lazy">
+              <canvas id="skinCanvas" aria-label="Interactive 3D model of the Minecraft skin of xSphereXx. Drag to rotate."></canvas>
+              <span class="skin-note" id="skinNote">loading 3d…</span>
+            </div>
 
-            animButtons.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    clearTimeout(waveTimeout);
-                    setAnimation(btn.dataset.anim);
-                });
-            });
+            <div class="viewer-foot" role="group" aria-label="Skin animation controls">
+              <button type="button" class="anim-btn on" data-anim="idle">idle</button>
+              <button type="button" class="anim-btn" data-anim="walk">walk</button>
+              <button type="button" class="anim-btn" data-anim="run">run</button>
+              <button type="button" class="anim-btn" data-anim="wave">wave</button>
+              <button type="button" class="spin-btn" id="skinRefresh" aria-label="Reload skin from Minecraft">
+                <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i><span>refresh</span>
+              </button>
+              <button type="button" class="spin-btn" id="spinBtn" aria-pressed="true">
+                <i class="fa-solid fa-rotate" aria-hidden="true"></i><span>pause spin</span>
+              </button>
+            </div>
+          </div>
+          <p class="viewer-caption">drag to rotate · pick an animation · updated live</p>
+        </div>
 
-            spinToggle.addEventListener('click', function () {
-                viewer.autoRotate = !viewer.autoRotate;
-                spinToggle.classList.toggle('active', viewer.autoRotate);
-                spinToggle.setAttribute('aria-pressed', String(viewer.autoRotate));
-            });
+      </div>
+    </div>
+  </div>
+</section>
 
-            camReset.addEventListener('click', function () {
-                viewer.resetCameraPose();
-            });
+<!-- ══════════ 04 · POEM ══════════ -->
+<section class="sec" id="poem">
+  <div class="wrap">
+    <div class="poem-grid">
 
-            /* Pause rendering while off-screen or tab hidden */
-            if ('IntersectionObserver' in window) {
-                new IntersectionObserver(function (entries) {
-                    entries.forEach(function (entry) {
-                        viewer.renderPaused = !entry.isIntersecting;
-                    });
-                }, { threshold: 0.05 }).observe(stage);
-            }
+      <div class="poem-copy" data-reveal>
+        <span class="eyebrow"><span class="dot" aria-hidden="true"></span>04 · a poem i wrote</span>
+        <h2 class="h2">Three Lines<br><em>About Focus</em>.</h2>
+        <p>You can&rsquo;t hold every star at once, so pick one and move toward it. Three lines, written late at night, about exactly that.</p>
 
-            /* Keep the canvas fitted to its card */
-            if ('ResizeObserver' in window) {
-                var resizeRaf = null;
-                new ResizeObserver(function () {
-                    if (resizeRaf) return;
-                    resizeRaf = requestAnimationFrame(function () {
-                        resizeRaf = null;
-                        viewer.setSize(stage.clientWidth, stage.clientHeight);
-                    });
-                }).observe(stage);
-            }
+        <div class="try-card">
+          <div style="flex:1;min-width:0">
+            <span class="lbl">try it</span>
+            <span class="val" id="tryVal">the whole sky, at once</span>
+          </div>
+          <button type="button" class="switch" id="poemSwitch" role="switch" aria-checked="false" aria-label="Show what the poem is about"></button>
+        </div>
 
-            /* Load skin with a fallback chain of texture providers */
-            function trySource(index) {
-                if (index >= SKIN_SOURCES.length) {
-                    useStaticFallback();
-                    return Promise.resolve();
-                }
-                return viewer.loadSkin(SKIN_SOURCES[index])
-                    .then(function () {
-                        onSkinReady();
-                    })
-                    .catch(function () {
-                        return trySource(index + 1);
-                    });
-            }
+        <p class="poem-tip"><i class="fa-solid fa-arrow-down" aria-hidden="true"></i>flip the switch to see what it&rsquo;s really about</p>
+      </div>
 
-            function onSkinReady() {
-                fallbackImg.classList.add('hidden');
-                statusEl.textContent = 'drag to rotate ✦ that\'s me!';
-                /* Say hi, then relax */
-                setAnimation('wave');
-                waveTimeout = setTimeout(function () { setAnimation('idle'); }, 2800);
-                /* Cape is optional — ignore failures */
-                viewer.loadCape('https://vzge.me/cape/512/' + UUID + '.png')
-                    .catch(function () { /* no cape — that's fine */ });
-            }
+      <div class="poem-visual" data-reveal style="--d:.1s">
+        <div class="poem-card">
+          <div class="poem-stars" aria-hidden="true"></div>
+          <div class="poem-tape" aria-hidden="true"></div>
 
-            trySource(0);
-        })();
-    })();
-    </script>
+          <span class="poem-by"><i class="fa-solid fa-star" aria-hidden="true"></i> by sphere</span>
+          <span class="poem-untitled">Melody</span>
+
+          <div class="poem-view" id="poemView">
+            <div class="poem-lines" id="poemLines">
+              <span>Sometimes one may feel the urge to reach for <em>all the stars</em>.</span>
+              <span>But to draw closer, one must learn to focus on <em>a single one</em>.</span>
+              <span>That realization may come from something as simple as <em>a melody</em>.</span>
+            </div>
+          </div>
+
+          <div class="poem-foot">
+            <span class="cap" id="poemCap">every star at once — impossible to hold</span>
+            <span class="poem-sign">sphere.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 05 · SOCIALS ══════════ -->
+<section class="sec" id="socials">
+  <div class="wrap">
+    <div class="dark-panel" data-reveal>
+      <div class="socials-grid">
+
+        <div class="socials-copy">
+          <span class="eyebrow"><span class="dot" aria-hidden="true"></span>05 · socials</span>
+          <h2 class="h2">Come Say<br><em>Hi.</em></h2>
+          <p class="dark-lead">
+            Streaming and videos are still on the way — for now, add me on
+            Discord or Steam, or check out what I&rsquo;m listening to.
+            I&rsquo;m @xSphereXx pretty much everywhere.
+          </p>
+
+          <button type="button" class="discord-pill" data-copy="xspherex" data-copy-msg="Discord username copied — add me!">
+            <i class="fa-brands fa-discord" aria-hidden="true"></i>
+            discord: xspherex
+            <span class="ci" aria-hidden="true"><i class="fa-solid fa-copy"></i></span>
+          </button>
+          <small class="hint">tap to copy, then add me as a friend</small>
+        </div>
+
+        <div class="links-card">
+          <div class="lc-head">
+            <span class="l"><i class="fa-solid fa-star" aria-hidden="true"></i> where to find me</span>
+            <span class="r">6 places</span>
+          </div>
+
+          <button type="button" class="link-row" data-copy="xspherex" data-copy-msg="Discord username copied — add me!">
+            <span class="link-ico"><i class="fa-brands fa-discord" aria-hidden="true"></i></span>
+            <span class="link-txt">
+              <span class="n"><b>Discord</b><span>xspherex</span></span>
+              <small>tap to copy my username</small>
+            </span>
+            <i class="fa-regular fa-copy link-act" aria-hidden="true"></i>
+          </button>
+
+          <a class="link-row" href="https://www.youtube.com/@xSphereXx" target="_blank" rel="noopener">
+            <span class="link-ico"><i class="fa-brands fa-youtube" aria-hidden="true"></i></span>
+            <span class="link-txt">
+              <span class="n"><b>YouTube</b><span>@xSphereXx</span></span>
+              <small>videos coming soon</small>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square link-act" aria-hidden="true"></i>
+          </a>
+
+          <a class="link-row" href="https://www.twitch.tv/xspherexxx" target="_blank" rel="noopener">
+            <span class="link-ico"><i class="fa-brands fa-twitch" aria-hidden="true"></i></span>
+            <span class="link-txt">
+              <span class="n"><b>Twitch</b><span>xspherexxx</span></span>
+              <small>no streams yet — follow to catch the first</small>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square link-act" aria-hidden="true"></i>
+          </a>
+
+          <a class="link-row" href="https://www.tiktok.com/@xspherexx" target="_blank" rel="noopener">
+            <span class="link-ico"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></span>
+            <span class="link-txt">
+              <span class="n"><b>TikTok</b><span>@xspherexx</span></span>
+              <small>short stuff</small>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square link-act" aria-hidden="true"></i>
+          </a>
+
+          <button type="button" class="link-row" data-copy="xSphereX" data-copy-msg="Steam name copied — add me!">
+            <span class="link-ico"><i class="fa-brands fa-steam" aria-hidden="true"></i></span>
+            <span class="link-txt">
+              <span class="n"><b>Steam</b><span>xSphereX</span></span>
+              <small>tap to copy · add me</small>
+            </span>
+            <i class="fa-regular fa-copy link-act" aria-hidden="true"></i>
+          </button>
+
+          <a class="link-row" href="https://open.spotify.com/search/BlueReaper" target="_blank" rel="noopener">
+            <span class="link-ico"><i class="fa-brands fa-spotify" aria-hidden="true"></i></span>
+            <span class="link-txt">
+              <span class="n"><b>Spotify</b><span>BlueReaper</span></span>
+              <small>my playlists</small>
+            </span>
+            <i class="fa-solid fa-arrow-up-right-from-square link-act" aria-hidden="true"></i>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <span class="logo">sphere.</span>
+      <nav aria-label="Footer">
+        <a href="#home">home</a>
+        <a href="#games">games</a>
+        <a href="#music">music</a>
+        <a href="#skin">my skin</a>
+        <a href="#poem">poem</a>
+        <a href="#socials">socials</a>
+      </nav>
+      <a class="to-top" href="#home">back to top <i class="fa-solid fa-arrow-up" aria-hidden="true"></i></a>
+    </div>
+    <p class="footer-bottom">© <span id="year">2026</span> @xSphereXx — built between playlists and blocks.</p>
+  </div>
+</footer>
+
+</div>
+
+<!-- game detail modal -->
+<div class="modal" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="gmTitle" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="document">
+    <button type="button" class="modal-x" data-close aria-label="Close">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+
+    <div class="modal-art">
+      <img id="gmArt" src="" alt="" decoding="async">
+    </div>
+
+    <div class="modal-body">
+      <p class="modal-kicker">
+        <span class="mk-dot" aria-hidden="true"></span>
+        <span id="gmYear">2026</span> · <span id="gmGenre">pinball · tower defense</span>
+      </p>
+
+      <h2 class="modal-title" id="gmTitle">Clash of Critters</h2>
+      <p class="modal-about" id="gmAbout"></p>
+
+      <div class="modal-facts">
+        <div class="fact">
+          <span class="f-k">made by</span>
+          <span class="f-v" id="gmMaker">Farlight Games</span>
+        </div>
+        <div class="fact">
+          <span class="f-k">play on</span>
+          <span class="f-v" id="gmPlatforms">iOS · Android</span>
+        </div>
+        <div class="fact">
+          <span class="f-k">released</span>
+          <span class="f-v" id="gmReleased">May 20, 2026</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn--line" data-close>close</button>
+        <a class="btn btn--dark" id="gmLink" href="#" target="_blank" rel="noopener">
+          official site <span class="b-ico" aria-hidden="true"><i class="fa-solid fa-arrow-up-right-from-square"></i></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i><span id="toastMsg">Copied!</span>
+</div>
+
+    <!-- 3D skin renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.4.2/bundles/skinview3d.bundle.js" defer></script>
+
+    <!-- site modules (load order matters) -->
+    <script src="js/00-utils.js?v=20" defer></script>
+    <script src="js/01-images.js?v=20" defer></script>
+    <script src="js/02-avatar.js?v=20" defer></script>
+    <script src="js/03-nav.js?v=20" defer></script>
+    <script src="js/04-ticker.js?v=20" defer></script>
+    <script src="js/05-reveal.js?v=20" defer></script>
+    <script src="js/06-clipboard.js?v=20" defer></script>
+    <script src="js/07-games.js?v=20" defer></script>
+    <script src="js/08-poem.js?v=20" defer></script>
+    <script src="js/09-parallax.js?v=20" defer></script>
+    <script src="js/10-skin.js?v=20" defer></script>
+    <script src="js/11-game-modal.js?v=20" defer></script>
+
 </body>
 </html>
