@@ -327,48 +327,9 @@ section[id],header[id]{scroll-margin-top:104px}
   50%{transform:translateY(-12px) rotate(18deg);opacity:1}
 }
 
-/* the portrait frame */
-.portrait{
+.pc-face.avatar-stack{
   position:relative;z-index:2;
-  margin-left:auto;
-  width:100%;max-width:352px;
-  border-radius:22px;
-  padding:9px;
-  background:linear-gradient(160deg,rgba(255,255,255,.95),rgba(255,255,255,.7));
-  border:1px solid rgba(255,255,255,.95);
-  box-shadow:var(--shadow-lg);
-}
-.portrait-inner{
-  position:relative;overflow:hidden;
-  border-radius:16px;
-  aspect-ratio:1/1.06;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 18%,rgba(255,255,255,.35),transparent 60%),
-    linear-gradient(155deg,#2B1B4A 0%,#1A1030 52%,#3E1F52 100%);
-  display:grid;place-items:center;
-}
-/* subtle grid behind the avatar */
-.portrait-inner::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
-  background-size:28px 28px;
-  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 10%,transparent 72%);
-  mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 10%,transparent 72%);
-}
-.portrait-inner::after{
-  content:'';position:absolute;left:50%;bottom:-6%;
-  width:86%;aspect-ratio:1;
-  transform:translateX(-50%);
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(242,55,94,.45),transparent 62%);
-  filter:blur(26px);
-}
-
-.avatar-stack{
-  position:relative;z-index:2;
-  width:64%;aspect-ratio:1;
+  width:66px;height:66px;flex:none;
   display:grid;place-items:center;
 }
 .avatar-stack img.av{
@@ -413,48 +374,147 @@ section[id],header[id]{scroll-margin-top:104px}
 }
 
 /* name plate across the bottom of the portrait */
-.portrait-plate{
-  position:absolute;left:50%;bottom:14px;z-index:4;
-  transform:translateX(-50%);
-  display:flex;align-items:center;gap:8px;
-  padding:7px 15px;
-  border-radius:20px;
-  background:rgba(23,19,38,.72);
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.16);
-  white-space:nowrap;
+/* ── hero player card ── */
+.player-card{
+  position:relative;z-index:2;
+  width:100%;max-width:392px;margin-left:auto;
+  padding:14px;
+  border-radius:24px;
+  background:linear-gradient(160deg,rgba(255,255,255,.97),rgba(255,255,255,.86));
+  border:1px solid rgba(255,255,255,.95);
+  box-shadow:var(--shadow-lg);
+  transform:rotate(-.6deg);
 }
-.portrait-plate .d{
-  width:5px;height:5px;border-radius:50%;background:var(--mint-2);
-  box-shadow:0 0 0 3px rgba(123,231,203,.18);
-  flex:none;
-}
-.portrait-plate .h{
-  font-family:var(--mono);font-size:.56rem;letter-spacing:.14em;
-  color:#fff;text-transform:lowercase;
+/* little washi-tape tab on the top edge */
+.pc-pin{
+  position:absolute;top:-13px;left:34px;z-index:3;
+  width:100px;height:27px;
+  background:linear-gradient(180deg,rgba(110,90,232,.42),rgba(110,90,232,.26));
+  border-left:1px dashed rgba(255,255,255,.7);
+  border-right:1px dashed rgba(255,255,255,.7);
+  transform:rotate(-4deg);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px);
 }
 
-/* caption under the portrait */
-.portrait-cap{
-  display:flex;align-items:baseline;justify-content:space-between;
-  gap:12px;flex-wrap:wrap;
-  margin-top:14px;padding-left:4px;
+/* dark name plate with the Discord pfp */
+.pc-head{
+  position:relative;
+  display:flex;align-items:center;gap:13px;
+  padding:14px;
+  border-radius:16px;
+  overflow:hidden;
+  background:linear-gradient(150deg,var(--plum) 0%,var(--plum-2) 58%,#43215A 100%);
 }
-.portrait-cap .n{
-  font-family:var(--serif);font-size:1.5rem;font-weight:350;
+.pc-head::after{
+  content:'';position:absolute;right:-40px;top:-40px;
+  width:130px;height:130px;border-radius:50%;
+  background:radial-gradient(circle,rgba(242,55,94,.5),transparent 66%);
+  filter:blur(6px);
+}
+.pc-online{
+  position:absolute;top:9px;right:11px;z-index:2;
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(255,255,255,.72);
+}
+.pc-online i{
+  width:5px;height:5px;border-radius:50%;background:var(--mint-2);
+  box-shadow:0 0 0 3px rgba(123,231,203,.18);
+}
+/* the square avatar tile — round avatar, pixel-crisp fallback */
+.pc-face{
+  position:relative;
+  border-radius:12px;
+  overflow:visible;
+  background:#2B1B4A;
+}
+.pc-face img.av{
+  border-radius:12px;
+  object-fit:cover;
+  image-rendering:auto;
+  border:2.5px solid rgba(255,255,255,.9);
+  box-shadow:0 8px 20px -8px rgba(0,0,0,.7);
+}
+.pc-face .avatar-deco{
+  position:absolute;inset:-11%;
+  width:122%;height:122%;
+  object-fit:contain;
+  pointer-events:none;
+  z-index:3;
+}
+.pc-face .av-fallback{
+  position:absolute;inset:0;
+  display:none;place-items:center;
+  border-radius:12px;
+  border:2.5px solid rgba(255,255,255,.9);
+  background:linear-gradient(135deg,var(--plum-2),var(--peri));
+  font-family:var(--mono);font-size:1rem;font-weight:700;
+  color:rgba(255,255,255,.8);
+  z-index:1;
+}
+.pc-face.img-failed img.av,
+.pc-face.img-failed .avatar-deco{display:none}
+.pc-face.img-failed .av-fallback{display:grid}
+
+.pc-id{position:relative;z-index:2;min-width:0}
+.pc-id .k{
+  display:block;
+  font-family:var(--mono);font-size:.5rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.46);margin-bottom:3px;
+}
+.pc-id .v{
+  display:block;
+  font-family:var(--serif);font-size:1.3rem;line-height:1.1;
+  font-weight:400;color:#fff;letter-spacing:-.01em;
+}
+.pc-id .s{
+  display:block;
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.1em;
+  color:rgba(255,255,255,.5);margin-top:3px;
+}
+
+/* name + tagline */
+.pc-name{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:10px;flex-wrap:wrap;
+  padding:13px 6px 11px;
+}
+.pc-name .n{
+  font-family:var(--serif);font-size:1.42rem;font-weight:400;
   letter-spacing:-.02em;line-height:1;
 }
-.portrait-cap .r{
-  font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);text-align:right;
-  line-height:1.5;max-width:19ch;
+.pc-name .r{
+  font-family:var(--mono);font-size:.47rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--muted);
+  text-align:right;line-height:1.5;max-width:20ch;
+}
+
+/* stat rows */
+.pc-rows{
+  border-top:1px dashed var(--line);
+  padding-top:3px;
+}
+.pc-row{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:12px;padding:7px 6px;
+}
+.pc-row + .pc-row{border-top:1px solid rgba(26,16,48,.06)}
+.pc-row .k{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--muted);flex:none;
+}
+.pc-row .v{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.02em;
+  color:var(--ink);text-align:right;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 
 /* now playing card */
 .now-card{
   position:relative;z-index:3;
-  margin-top:14px;
+  margin-top:10px;
   display:flex;align-items:center;gap:12px;
   padding:12px 14px;
   border-radius:15px;
@@ -1428,8 +1488,7 @@ section[id],header[id]{scroll-margin-top:104px}
   .hero-grid{grid-template-columns:1fr;gap:clamp(32px,6vw,52px)}
   .hero-copy{text-align:left}
   .hero-visual{width:100%;max-width:420px;margin:0 auto}
-  .portrait{margin:0 auto}
-  .portrait-cap{justify-content:space-between}
+  .player-card{margin-left:auto;margin-right:auto}
   .now-card{max-width:420px;margin-left:auto;margin-right:auto}
 
   .skin-grid{grid-template-columns:1fr;gap:clamp(24px,4vw,38px)}
@@ -1470,7 +1529,9 @@ section[id],header[id]{scroll-margin-top:104px}
   .artist-try{margin-top:7px;padding-top:7px}
 
   .hero h1{font-size:clamp(2.7rem,14vw,4rem)}
-  .portrait{max-width:320px}
+  .player-card{max-width:320px}
+  .pc-face.avatar-stack{width:56px;height:56px}
+  .pc-head{gap:11px;padding:13px}
   .now-card{max-width:320px}
   .hero-find .lbl{width:100%}
   .skin-stats{grid-template-columns:1fr}

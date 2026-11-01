@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="preload" as="image" href="assets/starrail-v6.webp">
-    <link rel="stylesheet" href="css/style.css?v=8">
+    <link rel="stylesheet" href="css/style.css?v=9">
     <noscript><style>
       /* no JS: show everything the scripts would normally reveal */
       [data-reveal]{opacity:1 !important;transform:none !important}
@@ -103,46 +103,55 @@
 
       <div class="hero-visual" data-reveal style="--d:.12s">
         <div class="portrait-glow" aria-hidden="true"></div>
-        <span class="sparkle sparkle--a" aria-hidden="true">✦</span>
-        <span class="sparkle sparkle--b" aria-hidden="true">✦</span>
-        <span class="sparkle sparkle--c" aria-hidden="true">✦</span>
+        <span class="sparkle sparkle--a" aria-hidden="true">&#10022;</span>
+        <span class="sparkle sparkle--b" aria-hidden="true">&#10022;</span>
+        <span class="sparkle sparkle--c" aria-hidden="true">&#10022;</span>
 
-        <div class="portrait">
-          <div class="portrait-inner">
-            <div class="avatar-stack" id="avatarStack">
+        <div class="player-card">
+          <span class="pc-pin" aria-hidden="true"></span>
+
+          <div class="pc-head">
+            <span class="pc-online"><i aria-hidden="true"></i>online</span>
+
+            <div class="pc-face" id="avatarStack">
               <span class="av-fallback" aria-hidden="true">xS</span>
               <img class="av" id="avatarImg"
                    src="https://cdn.discordapp.com/avatars/735936207162310716/c395de37de1d91ee3d95c1884e6c79dc.png?size=256"
                    data-fallback="https://minotar.net/helm/xSphereXx/256.png"
-                   alt="xSphereX — Discord avatar" width="220" height="220">
+                   alt="xSphereX &mdash; Discord avatar" width="256" height="256">
               <img class="avatar-deco" id="avatarDeco"
                    src="https://cdn.discordapp.com/avatar-decoration-presets/a_13913a00bd9990ab4102a3bf069f0f3f.png?size=256"
                    alt="" aria-hidden="true">
             </div>
 
-            <span class="portrait-status" role="img" aria-label="Online"></span>
-
-            <span class="portrait-plate">
-              <i class="d" aria-hidden="true"></i>
-              <span class="h">xspherex</span>
-            </span>
+            <div class="pc-id">
+              <span class="k">discord &middot; ign</span>
+              <span class="v">xSphereXx</span>
+              <span class="s">discord &middot; xspherex</span>
+            </div>
           </div>
-        </div>
 
-        <div class="portrait-cap">
-          <span class="n">Sphere.</span>
-          <span class="r">gamer · music collector · occasional poet</span>
-        </div>
+          <div class="pc-name">
+            <span class="n">Sphere.</span>
+            <span class="r">gamer &middot; music collector &middot; occasional poet</span>
+          </div>
 
-        <a class="now-card" href="#music" aria-label="Now playing: Evil by Camila and Evil">
-          <span class="now-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
-          <span class="now-body">
-            <span class="k"><i class="blip" aria-hidden="true"></i>now playing</span>
-            <span class="t">Evil</span>
-            <span class="a">Camila &amp; Evil</span>
-          </span>
-          <span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
-        </a>
+          <div class="pc-rows">
+            <div class="pc-row"><span class="k">favorite games</span><span class="v">Clash of Critters, Minecraft +2</span></div>
+            <div class="pc-row"><span class="k">on repeat</span><span class="v">Evil &middot; Camila</span></div>
+            <div class="pc-row"><span class="k">spotify</span><span class="v">BlueReaper</span></div>
+          </div>
+
+          <a class="now-card" href="#music" aria-label="Now playing: Evil by Camila and Evil">
+            <span class="now-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+            <span class="now-body">
+              <span class="k"><i class="blip" aria-hidden="true"></i>now playing</span>
+              <span class="t">Evil</span>
+              <span class="a">Camila &amp; Evil</span>
+            </span>
+            <span class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          </a>
+        </div>
       </div>
 
     </div>
@@ -780,18 +789,18 @@
     <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.4.2/bundles/skinview3d.bundle.js" defer></script>
 
     <!-- site modules (load order matters) -->
-    <script src="js/00-utils.js?v=8" defer></script>
-    <script src="js/01-images.js?v=8" defer></script>
-    <script src="js/02-avatar.js?v=8" defer></script>
-    <script src="js/03-nav.js?v=8" defer></script>
-    <script src="js/04-ticker.js?v=8" defer></script>
-    <script src="js/05-reveal.js?v=8" defer></script>
-    <script src="js/06-clipboard.js?v=8" defer></script>
-    <script src="js/07-games.js?v=8" defer></script>
-    <script src="js/08-poem.js?v=8" defer></script>
-    <script src="js/09-parallax.js?v=8" defer></script>
-    <script src="js/10-skin.js?v=8" defer></script>
-    <script src="js/11-game-modal.js?v=8" defer></script>
+    <script src="js/00-utils.js?v=9" defer></script>
+    <script src="js/01-images.js?v=9" defer></script>
+    <script src="js/02-avatar.js?v=9" defer></script>
+    <script src="js/03-nav.js?v=9" defer></script>
+    <script src="js/04-ticker.js?v=9" defer></script>
+    <script src="js/05-reveal.js?v=9" defer></script>
+    <script src="js/06-clipboard.js?v=9" defer></script>
+    <script src="js/07-games.js?v=9" defer></script>
+    <script src="js/08-poem.js?v=9" defer></script>
+    <script src="js/09-parallax.js?v=9" defer></script>
+    <script src="js/10-skin.js?v=9" defer></script>
+    <script src="js/11-game-modal.js?v=9" defer></script>
 
 </body>
 </html>
