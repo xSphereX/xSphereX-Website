@@ -786,9 +786,9 @@ section[id],header[id]{scroll-margin-top:104px}
   background:
     radial-gradient(ellipse 90% 60% at 20% 8%,rgba(0,90,205,.4),transparent 60%),
     linear-gradient(160deg,#2A2F3D 0%,#232733 52%,#1A1E28 100%);
-  padding:clamp(24px,3.4vw,38px);
+  padding:clamp(18px,2.6vw,26px);
   display:flex;flex-direction:column;
-  min-height:420px;
+  min-height:0;
 }
 .song-left .chip{
   align-self:flex-start;
@@ -799,9 +799,10 @@ section[id],header[id]{scroll-margin-top:104px}
   text-transform:uppercase;color:rgba(255,255,255,.85);
 }
 .song-left .chip i{color:var(--coral-2);font-size:.55rem}
-.sleeve-wrap{flex:1;display:grid;place-items:center;padding:22px 0}
+.sleeve-wrap{flex:1;min-height:0;display:grid;place-items:center;padding:16px 0}
 .sleeve{
-  position:relative;width:min(74%,218px);aspect-ratio:1;
+  position:relative;
+  height:100%;width:auto;aspect-ratio:1;max-width:100%;
   border-radius:8px;
   background:linear-gradient(150deg,#2F8BE6 0%,#005ACD 42%,#00528F 100%);
   box-shadow:0 30px 60px -22px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.14);
@@ -850,7 +851,7 @@ section[id],header[id]{scroll-margin-top:104px}
 }
 .song-left .meta{
   display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding-top:14px;border-top:1px solid rgba(255,255,255,.14);
+  padding-top:12px;border-top:1px solid rgba(255,255,255,.14);
   font-family:var(--mono);font-size:.5rem;letter-spacing:.13em;
   text-transform:uppercase;color:rgba(255,255,255,.5);
 }
@@ -1502,7 +1503,7 @@ section[id],header[id]{scroll-margin-top:104px}
   .song-card{grid-template-columns:1fr}
   .song-left{min-height:0}
   .song-left .sleeve-wrap{padding:14px 0 18px}
-  .song-left .sleeve{width:min(46%,180px)}
+  .song-left .sleeve{width:min(58%,196px);height:auto;max-width:none}
 }
 
 /* ── keep two columns longer than before; the cards are fluid ── */
