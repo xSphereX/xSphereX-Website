@@ -24,6 +24,9 @@ js/                 one small module per feature, loaded in order
   09-parallax.js      pointer parallax on the hero glow
   10-skin.js          3D Minecraft skin viewer
   11-game-modal.js    game detail dialog
+```
+
+All imagery is referenced by URL, so there are no binary assets in the repo.
 assets/             optimised WebP art (game covers + artist photos)
 ```
 
