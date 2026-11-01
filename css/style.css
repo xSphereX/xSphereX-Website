@@ -1005,6 +1005,66 @@ section[id],header[id]{scroll-margin-top:104px}
 .artist-try i{margin-top:.18em}
 
 /* ═══════════════════════════════════════════════════════════
+   8b · ANIME
+   ═══════════════════════════════════════════════════════════ */
+.anime-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:13px;
+  margin-top:34px;
+}
+.anime{
+  position:relative;
+  display:flex;flex-direction:column;
+  padding:16px 15px 14px;
+  border-radius:var(--r-md);
+  background:var(--paper);
+  border:1px solid var(--line-soft);
+  box-shadow:var(--shadow-sm);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .25s;
+}
+.anime:hover{
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-md);
+  border-color:rgba(0,90,205,.4);
+}
+.anime-top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:8px;margin-bottom:12px;
+}
+.anime-no{
+  font-family:var(--mono);font-size:.48rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);
+}
+.anime-icon{
+  width:26px;height:26px;border-radius:50%;flex:none;
+  display:grid;place-items:center;
+  background:var(--coral-tint);color:var(--coral);font-size:.56rem;
+}
+.anime-title{
+  font-family:var(--serif);font-weight:400;
+  font-size:1.02rem;line-height:1.18;letter-spacing:-.015em;
+}
+.anime-genre{
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--accent-text);margin-top:5px;
+}
+.anime-desc{
+  font-size:.76rem;line-height:1.55;color:var(--muted);
+  margin-top:9px;flex:1;
+}
+.anime-foot{
+  display:flex;align-items:center;justify-content:space-between;gap:6px;
+  margin-top:12px;padding-top:10px;
+  border-top:1px dashed var(--line);
+  font-family:var(--mono);font-size:.46rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);
+}
+.anime-tag{
+  flex:none;padding:2px 7px;border-radius:20px;
+  background:rgba(0,90,205,.07);color:var(--accent-text);
+  font-size:.44rem;letter-spacing:.1em;
+}
+
+/* ═══════════════════════════════════════════════════════════
    9 · DARK PANELS (skin / socials)
    ═══════════════════════════════════════════════════════════ */
 .dark-panel{
@@ -1501,6 +1561,7 @@ section[id],header[id]{scroll-margin-top:104px}
 @media (max-width:1000px){
   .games-grid,
   .artists-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .anime-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 
   /* hero stays side-by-side; the columns just get tighter */
   .hero-grid{
@@ -1545,6 +1606,10 @@ section[id],header[id]{scroll-margin-top:104px}
 @media (max-width:520px){
   .games-grid,
   .artists-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .anime-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .anime{padding:13px 12px 12px}
+  .anime-title{font-size:.94rem}
+  .anime-desc{font-size:.72rem}
   .game-body{padding:11px 11px 12px}
   .game-title{font-size:1rem}
   .game-desc{font-size:.72rem;margin-top:6px}
