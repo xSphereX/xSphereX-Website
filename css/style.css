@@ -1498,6 +1498,21 @@ section[id],header[id]{scroll-margin-top:104px}
 }
 .to-top:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 .to-top i{font-size:.55rem}
+/* credits — quiet, below the fold, but present */
+.credits{
+  margin-top:22px;padding-top:16px;
+  border-top:1px solid var(--line-soft);
+  max-width:78ch;
+}
+.credits p{
+  font-size:.68rem;line-height:1.7;color:var(--muted);
+  margin-bottom:9px;
+}
+.credits p:last-child{margin-bottom:0}
+.credits strong{color:var(--ink-2);font-weight:700}
+.credits a{color:var(--accent-text);text-decoration:underline;text-underline-offset:2px}
+.credits a:hover{color:var(--ink)}
+
 .footer-bottom{
   margin-top:20px;padding-top:16px;
   border-top:1px solid var(--line-soft);
